@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="620" viewBox="0 0 390 620" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="390" height="620" fill="#fbfaf7"/>
+  <text x="24" y="44" fill="#15293f" font-size="20" font-weight="700">银行核验的是五条证据线</text>
+  <text x="24" y="70" fill="#5c6670" font-size="12.5">每条线都应指向同一笔交易</text>
+  <g>
+    <rect x="24" y="96" width="342" height="70" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="178" width="342" height="70" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="260" width="342" height="70" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="342" width="342" height="70" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="424" width="342" height="70" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  </g>
+  <g fill="#2f6b5e" font-size="15" font-weight="700">
+    <text x="44" y="126">主体线</text>
+    <text x="44" y="208">交易线</text>
+    <text x="44" y="290">履约线</text>
+    <text x="44" y="372">资金线</text>
+    <text x="44" y="454">申报线</text>
+  </g>
+  <g fill="#232b33" font-size="13">
+    <text x="44" y="150">谁签约、履约、付款、收款</text>
+    <text x="44" y="232">买什么、为何需要、如何定价</text>
+    <text x="44" y="314">如何交付、成果在哪里</text>
+    <text x="44" y="396">从哪里出、经何通道、到哪里</text>
+    <text x="44" y="478">合同·发票·账务·申报如何表述</text>
+  </g>
+  <rect x="24" y="540" width="342" height="58" rx="4" fill="#eef3f1" stroke="#2f6b5e" stroke-width="1"/>
+  <text x="195" y="564" text-anchor="middle" fill="#15293f" font-size="16" font-weight="700">同一笔交易</text>
+  <text x="195" y="584" text-anchor="middle" fill="#2f6b5e" font-size="12">一致 · 可解释 · 可核验 · 可追溯</text>
+</svg>

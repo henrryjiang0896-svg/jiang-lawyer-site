@@ -411,6 +411,24 @@ select:focus-visible {
 .prose thead th { background: var(--paper-2); color: var(--navy); font-weight: 700; }
 .prose code { background: var(--paper-2); padding: 2px 6px; border-radius: 4px; font-size: 0.92em; }
 
+/* 文章信息图（响应式 picture，限定在 .prose 下，避免全局污染） */
+.prose figure.article-figure { margin: 28px 0; padding: 0; }
+.prose .article-img {
+  display: block; width: 100%; height: auto; max-width: 100%;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--paper);
+}
+.prose figcaption.figure-caption {
+  margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6;
+}
+
+/* 移动端按实际 SVG 比例预留空间，避免图片加载后发生布局跳动（CLS）；
+   仅作用于本文两张信息图，不影响其他文章图片。 */
+@media (max-width: 640px) {
+  .prose figure.article-figure.figure-four-reviews .article-img { aspect-ratio: 390 / 700; }
+  .prose figure.article-figure.figure-evidence-chain .article-img { aspect-ratio: 390 / 620; }
+}
+
 /* ===== TOC ===== */
 .toc {
   position: sticky; top: 88px; font-size: 13.5px;

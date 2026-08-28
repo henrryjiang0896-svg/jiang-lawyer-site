@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="700" viewBox="0 0 390 700" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="390" height="700" fill="#fbfaf7"/>
+  <text x="24" y="46" fill="#15293f" font-size="22" font-weight="700">跨境付款的四道审查</text>
+  <text x="24" y="74" fill="#5c6670" font-size="13">四套框架关注不同问题，</text>
+  <text x="24" y="94" fill="#5c6670" font-size="13">但最终都核验同一组商业事实</text>
+  <g>
+    <rect x="24" y="128" width="342" height="108" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="252" width="342" height="108" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="376" width="342" height="108" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="24" y="500" width="342" height="108" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  </g>
+  <g fill="#15293f" font-size="17" font-weight="700">
+    <text x="44" y="162">01 合同</text>
+    <text x="44" y="286">02 税务</text>
+    <text x="44" y="410">03 外汇</text>
+    <text x="44" y="534">04 银行</text>
+  </g>
+  <g fill="#232b33" font-size="14">
+    <text x="44" y="188">为什么付款 · 向谁付款</text>
+    <text x="44" y="312">这笔钱在税法上是什么</text>
+    <text x="44" y="436">资金路径是否与交易一致</text>
+    <text x="44" y="560">风险是否仍可被接受</text>
+  </g>
+  <g fill="#5c6670" font-size="12.5">
+    <text x="44" y="212">主体 · 权利 · 履约</text>
+    <text x="44" y="336">性质 · 扣缴 · 备案≠认可</text>
+    <text x="44" y="460">真实 · 合理 · 逻辑</text>
+    <text x="44" y="584">客户 · 交易 · 受益人</text>
+  </g>
+  <rect x="24" y="628" width="342" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  <text x="44" y="652" fill="#15293f" font-size="14" font-weight="600">任何一道存疑都可能触发补材料；</text>
+  <text x="44" y="674" fill="#5c6670" font-size="13">真正要准备的是一致证据，而非更多文件。</text>
+</svg>

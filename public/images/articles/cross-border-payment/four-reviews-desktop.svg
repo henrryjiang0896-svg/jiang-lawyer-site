@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="720" height="440" fill="#fbfaf7"/>
+  <text x="40" y="52" fill="#15293f" font-size="26" font-weight="700">跨境付款的四道审查</text>
+  <text x="40" y="80" fill="#5c6670" font-size="15">四套框架关注不同问题，但最终都核验同一组商业事实</text>
+  <g>
+    <rect x="40" y="110" width="148" height="210" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="204" y="110" width="148" height="210" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="368" y="110" width="148" height="210" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="532" y="110" width="148" height="210" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  </g>
+  <g fill="#15293f" font-size="17" font-weight="700">
+    <text x="56" y="146">01 合同</text>
+    <text x="220" y="146">02 税务</text>
+    <text x="384" y="146">03 外汇</text>
+    <text x="548" y="146">04 银行</text>
+  </g>
+  <g stroke="#e7e3d9" stroke-width="1">
+    <line x1="56" y1="162" x2="172" y2="162"/>
+    <line x1="220" y1="162" x2="336" y2="162"/>
+    <line x1="384" y1="162" x2="500" y2="162"/>
+    <line x1="548" y1="162" x2="664" y2="162"/>
+  </g>
+  <g fill="#232b33" font-size="13.5">
+    <text x="56" y="190">为什么付款</text>
+    <text x="56" y="212">向谁付款</text>
+    <text x="220" y="190">这笔钱是什么</text>
+    <text x="220" y="212">（性质·扣缴）</text>
+    <text x="384" y="190">路径是否一致</text>
+    <text x="384" y="212">真实·合理</text>
+    <text x="548" y="190">风险是否可接受</text>
+    <text x="548" y="212">客户·交易</text>
+  </g>
+  <g fill="#5c6670" font-size="12">
+    <text x="56" y="246">主体·权利·履约</text>
+    <text x="220" y="246">备案≠认可</text>
+    <text x="384" y="246">逻辑自洽</text>
+    <text x="548" y="246">受益所有人</text>
+  </g>
+  <rect x="40" y="345" width="640" height="66" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  <text x="64" y="372" fill="#15293f" font-size="14" font-weight="600">任何一道审查存疑，都可能触发补材料。</text>
+  <text x="64" y="394" fill="#5c6670" font-size="13">真正要准备的，是能相互印证的一致证据，而不是更多文件。</text>
+</svg>

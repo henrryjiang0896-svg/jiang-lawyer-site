@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="720" height="480" fill="#fbfaf7"/>
+  <text x="40" y="50" fill="#15293f" font-size="24" font-weight="700">银行真正核验的是五条证据线</text>
+  <text x="40" y="78" fill="#5c6670" font-size="14">每条线都应指向同一笔交易，而不是各自成立</text>
+  <g>
+    <rect x="40" y="110" width="330" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="40" y="182" width="330" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="40" y="254" width="330" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="40" y="326" width="330" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+    <rect x="40" y="398" width="330" height="58" rx="4" fill="#f3f1ea" stroke="#e7e3d9" stroke-width="1"/>
+  </g>
+  <g fill="#2f6b5e" font-size="15" font-weight="700">
+    <text x="58" y="136">主体线</text>
+    <text x="58" y="208">交易线</text>
+    <text x="58" y="280">履约线</text>
+    <text x="58" y="352">资金线</text>
+    <text x="58" y="424">申报线</text>
+  </g>
+  <g fill="#232b33" font-size="13">
+    <text x="58" y="156">谁签约、履约、付款、收款</text>
+    <text x="58" y="228">买什么、为何需要、如何定价</text>
+    <text x="58" y="300">如何交付、成果在哪里</text>
+    <text x="58" y="372">从哪里出、经何通道、到哪里</text>
+    <text x="58" y="444">合同·发票·账务·申报如何表述</text>
+  </g>
+  <g stroke="#b9c2bf" stroke-width="1.5">
+    <line x1="370" y1="139" x2="468" y2="283"/>
+    <line x1="370" y1="211" x2="468" y2="283"/>
+    <line x1="370" y1="283" x2="468" y2="283"/>
+    <line x1="370" y1="355" x2="468" y2="283"/>
+    <line x1="370" y1="427" x2="468" y2="283"/>
+  </g>
+  <circle cx="560" cy="283" r="92" fill="#eef3f1" stroke="#2f6b5e" stroke-width="3"/>
+  <text x="560" y="270" text-anchor="middle" fill="#15293f" font-size="20" font-weight="700">同一笔交易</text>
+  <text x="560" y="298" text-anchor="middle" fill="#2f6b5e" font-size="14" font-weight="600">一致 · 可解释</text>
+  <text x="560" y="320" text-anchor="middle" fill="#5c6670" font-size="12.5">可核验 · 可追溯</text>
+</svg>
