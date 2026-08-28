@@ -1,0 +1,152 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import AuthorCard from '../../components/AuthorCard.astro';
+import Toc from '../../components/Toc.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { columnOf } from '../../lib/columns';
+import { articleJsonLd, faqJsonLd } from '../../lib/seo';
+import { extractFaq } from '../../lib/faq';
+import siteConfig from '../../site.config';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+const d = entry.data;
+const col = columnOf(d.category);
+const d2 = siteConfig.display;
+
+const directAnswer = d.directAnswer ?? '';
+
+const summary =
+  (entry.body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim()) ?? d.title;
+
+const faqData = faqJsonLd(entry.body);
+const jsonLd = [articleJsonLd(entry, summary), ...(faqData ? [faqData] : [])];
+
+// 相关文章：同栏目优先，不足 3 篇时补充其他栏目
+const all = (await getCollection('articles')).sort((a, b) =>
+  b.data.datePublished.localeCompare(a.data.datePublished)
+);
+const related = all
+  .filter((a) => a.slug !== entry.slug)
+  .sort((a, b) => {
+    const aSame = a.data.category === d.category ? 0 : 1;
+    const bSame = b.data.category === d.category ? 0 : 1;
+    return aSame - bSame;
+  })
+  .slice(0, 3);
+
+const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<BaseLayout
+  title={d.title}
+  description={summary}
+  canonicalPath={`/articles/${entry.slug}`}
+  jsonLd={jsonLd}
+  ogType="article"
+>
+  <div class="container">
+    <Breadcrumb
+      items={[
+        { label: '首页', href: '/' },
+        { label: col.label, href: `/${col.slug}` },
+        { label: d.title },
+      ]}
+    />
+  </div>
+
+  <div class="container">
+    <div class="article-wrap">
+      <aside aria-label="文章目录">
+        <Toc headings={headings} />
+      </aside>
+
+      <article class="prose article-main">
+        <!-- 移动端折叠目录 -->
+        {
+          tocItems.length > 0 && (
+            <details class="toc-mobile">
+              <summary>本文目录</summary>
+              <div class="toc-mobile__body">
+                {tocItems.map((h) => (
+                  <a href={`#${h.slug}`} class={h.depth === 3 ? 'toc-h3' : undefined}>
+                    {h.text}
+                  </a>
+                ))}
+              </div>
+            </details>
+          )
+        }
+
+        <p class="article-kicker">{col.label}</p>
+        <h1 class="article-title">{d.title}</h1>
+        <div class="article-meta">
+          <span>{d2.penName}｜{d2.jobTitle}</span>
+          <span class="dot">更新于 {d.updatedAsOf}</span>
+        </div>
+
+        {
+          directAnswer && (
+            <div class="direct-answer" role="note">
+              <div class="direct-answer__label">直接答案</div>
+              <p>{directAnswer}</p>
+            </div>
+          )
+        }
+
+        <div class="freshness">
+          本文信息截至 {d.updatedAsOf}。所涉规则（关税、CRS、外汇、海关、税务等）均可能调整，引用与决策时请以官方最新来源与具备资质的专业判断为准。
+        </div>
+
+        <Content />
+
+        <AuthorCard />
+
+        <Disclaimer
+          text="本文仅为一般性专业信息分享，不构成法律、税务、外汇、海关或投资意见，也不构成委托代理关系，亦不承诺任何结果。具体事项应结合主体、商品、监管模式、合同、资金与单证等事实，由具备资质的专业人士判断。"
+        />
+
+        <div class="navy-block" style="margin-top:36px;">
+          <h3>联系咨询</h3>
+          <p>对本文涉及的问题有进一步疑问，可就具体情形联系江恒律师做初步评估。</p>
+          <a class="btn btn--light" href="/contact">联系咨询</a>
+          <p class="navy-block__note">提交咨询不构成委托关系，请勿发送保密材料或敏感信息。</p>
+        </div>
+      </article>
+    </div>
+
+    {
+      related.length > 0 && (
+        <section class="related">
+          <h2 class="related__title">相关文章</h2>
+          <div class="dir-list">
+            {related.map((a) => (
+              <a class="dir-item" href={`/articles/${a.slug}`}>
+                <span class="dir-item__col">{columnOf(a.data.category).label}</span>
+                <span>
+                  <span class="dir-item__title">{a.data.title}</span>
+                </span>
+                <span class="dir-item__meta">更新于 {a.data.updatedAsOf}</span>
+                <span class="dir-item__arrow" aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

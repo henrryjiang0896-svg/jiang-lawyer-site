@@ -1,0 +1,16 @@
+---
+interface Props {
+  title?: string;
+  body?: string;
+}
+const {
+  title = '需要就具体问题做初步评估？',
+  body = '如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，可联系江恒律师预约初步评估。',
+} = Astro.props;
+---
+
+<section class="cta" aria-label="咨询入口">
+  <h3>{title}</h3>
+  <p>{body}</p>
+  <a class="btn btn--ghost" href="/contact" style="background:#fff;color:var(--navy);">联系咨询</a>
+</section>

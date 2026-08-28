@@ -1,0 +1,177 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { websiteJsonLd, personJsonLd, legalServiceJsonLd } from '../lib/seo';
+import siteConfig from '../site.config';
+import { columnOf } from '../lib/columns';
+
+const articles = (await getCollection('articles')).sort((a, b) =>
+  b.data.datePublished.localeCompare(a.data.datePublished)
+);
+
+const d = siteConfig.display;
+const columns = siteConfig.columns;
+const personLd = personJsonLd();
+const jsonLdArr = [
+  websiteJsonLd(),
+  ...(personLd ? [personLd] : []),
+  legalServiceJsonLd(),
+];
+
+// 文章短摘要（取正文「> 摘要：」行）
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+
+const articlesView = articles.map((a) => ({
+  slug: a.slug,
+  title: a.data.title,
+  col: columnOf(a.data.category).label,
+  updated: a.data.updatedAsOf,
+  summary: summaryOf(a.body),
+}));
+---
+
+<BaseLayout
+  title={d.tagline}
+  description={d.subtitle}
+  jsonLd={jsonLdArr}
+>
+  <!-- 首屏：编辑型布局 -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div>
+        <p class="hero__eyebrow">{d.tagline}</p>
+        <h1>跨境税务与出海合规律师</h1>
+        <p class="hero__sub">{d.subtitle}</p>
+        <p class="hero__identity">
+          {d.lawFirm ?? siteConfig.author.lawFirm}｜7 年金融从业｜5 年法律实务
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="/articles">阅读专业文章</a>
+          <a class="btn btn--ghost" href="/contact">联系咨询</a>
+        </div>
+      </div>
+      <aside class="hero__module" aria-label="专业方向">
+        <p class="hero__module-title">专业方向</p>
+        <ul>
+          {
+            columns.map((c) => (
+              <li>
+                <a href={c.href}>
+                  <span>{c.label}</span>
+                  <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 我关注的问题 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">我关注的问题</h2>
+      <p class="section__lead">标题即问题。点击进入，获取可直接核验的合规视角。</p>
+      <div class="q-list">
+        {
+          articlesView.map((a, i) => (
+            <div class="q-item">
+              <span class="q-item__no">{String(i + 1).padStart(2, '0')}</span>
+              <a href={`/articles/${a.slug}`}>{a.title}</a>
+              <span class="arrow" aria-hidden="true">→</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 专业背景 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">专业背景</h2>
+      <p class="section__lead">以金融底色理解风险，以律师视角提供可落地方案。</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat__num">7<small> 年</small></div>
+          <div class="stat__label">金融从业经验</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">5<small> 年</small></div>
+          <div class="stat__label">国有银行</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">2<small> 年</small></div>
+          <div class="stat__label">上市供应链企业</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">5<small> 年</small></div>
+          <div class="stat__label">法律实务经验</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务与能力 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">服务与能力</h2>
+      <p class="section__lead">
+        以下为可提供的专业支持方向，不构成结果承诺；具体范围以正式委托与事实评估为准。
+      </p>
+      <div class="grid-2 svc-list">
+        {
+          d.services.map((s) => (
+            <div class="svc">
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新文章 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">最新文章</h2>
+      <p class="section__lead">基于官方来源撰写，并经发布前准确性核验。</p>
+      <div class="dir-list">
+        {
+          articlesView.map((a) => (
+            <a class="dir-item" href={`/articles/${a.slug}`}>
+              <span class="dir-item__col">{a.col}</span>
+              <span>
+                <span class="dir-item__title">{a.title}</span>
+                <span class="dir-item__summary">{a.summary}</span>
+              </span>
+              <span class="dir-item__meta">更新于 {a.updated}</span>
+              <span class="dir-item__arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系咨询 -->
+  <section class="section">
+    <div class="container">
+      <div class="navy-block">
+        <h2>联系咨询</h2>
+        <p>
+          如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，
+          可就具体问题联系江恒律师做初步评估。
+        </p>
+        <a class="btn btn--light" href="/contact">联系咨询</a>
+        <p class="navy-block__note">
+          提交咨询不构成委托关系，请勿发送保密材料或敏感信息（如账户号码、身份证件、合同条款）。
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

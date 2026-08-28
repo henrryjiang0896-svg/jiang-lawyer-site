@@ -1,0 +1,61 @@
+---
+import siteConfig from '../site.config';
+
+const nav = siteConfig.nav;
+const current = Astro.url.pathname;
+function isActive(href: string): boolean {
+  if (href === '/') return current === '/';
+  return current === href || current.startsWith(href + '/');
+}
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/" aria-label="江恒律师首页">
+      <span class="brand__name">江恒律师</span>
+      <span class="brand__tag">跨境税务与出海合规</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav__checkbox" aria-hidden="true" />
+    <label for="nav-toggle" class="nav__toggle">菜单</label>
+    <nav class="nav" aria-label="主导航">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class={isActive(item.href) ? 'is-active' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav__toggle {
+    display: none;
+    font-size: 14px;
+    border: 1px solid var(--line-strong);
+    background: var(--white);
+    color: var(--navy);
+    border-radius: var(--radius);
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  .nav__checkbox { display: none; }
+  @media (max-width: 720px) {
+    .nav__toggle { display: inline-block; }
+    .nav {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding-top: 12px;
+    }
+    .nav__checkbox:checked ~ .nav { display: flex; }
+    .site-header__inner { position: relative; }
+  }
+</style>

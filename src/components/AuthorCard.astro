@@ -1,0 +1,13 @@
+---
+import siteConfig from '../site.config';
+
+const d = siteConfig.display;
+---
+
+<div class="author-card">
+  <div class="author-card__avatar" aria-hidden="true">{d.penName.slice(0, 1)}</div>
+  <div class="author-card__body">
+    <p class="author-card__name">{d.penName}｜{d.jobTitle}</p>
+    <p>{d.bio}</p>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+---
+import siteConfig from '../site.config';
+
+const year = new Date().getFullYear();
+const a = siteConfig.author;
+const hasEmail = Boolean(a.email);
+const columns = siteConfig.columns;
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>
+      <h4>江恒律师 · 跨境税务与出海合规</h4>
+      <p>
+        {siteConfig.display.jobTitle}。专注跨境税务、企业出海合规与跨境资金账户，
+        以金融与法律的复合视角服务企业与创业者。
+      </p>
+      {
+        hasEmail && (
+          <p class="site-footer__contact">
+            公开邮箱：<a href={`mailto:${a.email}`}>{a.email}</a>
+          </p>
+        )
+      }
+      <p class="site-footer__disclaimer">
+        本站内容仅作一般专业信息分享，不构成法律、税务、外汇、海关或投资意见，
+        也不构成委托代理关系，亦不承诺任何结果。具体事项应结合事实与发布时有效规则，
+        由具备资质的专业人士判断。
+      </p>
+    </div>
+    <div>
+      <h4>栏目与页面</h4>
+      <ul class="site-footer__links">
+        {columns.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+        <li><a href="/articles">文章中心</a></li>
+        <li><a href="/services">服务与能力</a></li>
+        <li><a href="/about">关于江恒</a></li>
+        <li><a href="/contact">联系咨询</a></li>
+        <li><a href="/disclaimer">隐私与免责声明</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container" style="color:var(--muted);font-size:12.5px;padding-top:18px;">
+    © {year} 江恒律师。保留所有权利。
+  </div>
+</footer>

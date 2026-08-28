@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { personJsonLd } from '../lib/seo';
+import siteConfig from '../site.config';
+import { columnOf } from '../lib/columns';
+
+const d = siteConfig.display;
+const a = siteConfig.author;
+const articles = (await getCollection('articles')).sort((x, y) =>
+  y.data.datePublished.localeCompare(x.data.datePublished)
+);
+const personLd = personJsonLd();
+const hasEmail = Boolean(a.email);
+
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+const articlesView = articles.map((x) => ({
+  slug: x.slug,
+  title: x.data.title,
+  col: columnOf(x.data.category).label,
+  updated: x.data.updatedAsOf,
+  summary: summaryOf(x.body),
+}));
+---
+
+<BaseLayout
+  title="关于江恒"
+  description={d.aboutDescription}
+  canonicalPath="/about"
+  jsonLd={personLd ? [personLd] : []}
+>
+  <div class="container">
+    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '关于江恒' }]} />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">{d.tagline}</p>
+      <h1>关于江恒</h1>
+      <p class="lead">{d.jobTitle}。专注跨境税务、企业出海合规与跨境资金账户。</p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      <h2 class="section__title">金融与法律的复合经历</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card__kicker">复合视角</div>
+          <h3>金融底色 + 法律实务</h3>
+          <p>{d.bio}</p>
+        </div>
+        <div class="card">
+          <div class="card__kicker">执业机构</div>
+          <h3>{a.lawFirm}</h3>
+          <p>
+            文章与观点均以「{d.penName}」署名，聚焦跨境税务、企业出海合规与跨境资金账户，
+            以金融与法律的复合视角提供可落地的合规分析。
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section__title" style="margin-top:48px;">专业关注领域</h2>
+      <ul class="clean-list">
+        {d.focuses.map((f) => <li>{f}</li>)}
+      </ul>
+
+      <h2 class="section__title" style="margin-top:48px;">已发布文章</h2>
+      <div class="dir-list">
+        {
+          articlesView.map((x) => (
+            <a class="dir-item" href={`/articles/${x.slug}`}>
+              <span class="dir-item__col">{x.col}</span>
+              <span>
+                <span class="dir-item__title">{x.title}</span>
+                <span class="dir-item__summary">{x.summary}</span>
+              </span>
+              <span class="dir-item__meta">更新于 {x.updated}</span>
+              <span class="dir-item__arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <h2 class="section__title" style="margin-top:48px;">执业机构与联系</h2>
+      <div class="card">
+        <p style="margin:0 0 8px;color:var(--ink);">
+          <strong style="color:var(--navy);">执业机构：</strong>{a.lawFirm}
+        </p>
+        {
+          hasEmail && (
+            <p style="margin:0;color:var(--ink);">
+              <strong style="color:var(--navy);">公开邮箱：</strong>
+              <a href={`mailto:${a.email}`}>{a.email}</a>
+            </p>
+          )
+        }
+        <p class="disclaimer-box" role="note" style="margin-top:18px;">
+          执业地区、执业证号、头像等信息将在确认后补充；确认前不会展示于公开页面或结构化数据中。
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

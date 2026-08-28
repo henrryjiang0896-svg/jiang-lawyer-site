@@ -1,0 +1,94 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import siteConfig from '../site.config';
+import { getSiteHref } from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  jsonLd?: Record<string, any>[];
+  ogType?: string;
+}
+
+const {
+  title,
+  description = siteConfig.display.subtitle,
+  canonicalPath,
+  jsonLd = [],
+  ogType = 'website',
+} = Astro.props;
+
+const siteHref = getSiteHref();
+const hasDomain = siteHref !== '';
+const path = canonicalPath ?? Astro.url.pathname;
+const canonical = hasDomain ? new URL(path, siteHref).toString() : '';
+const ogUrl = canonical;
+const ogImage = hasDomain ? siteHref + '/og.png' : '';
+const fullTitle = `${title} · 江恒律师`;
+
+// 内联 SVG favicon（深蓝方块 + 江），避免外部依赖
+const favicon =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="4" fill="%2315293f"/><text x="16" y="22" font-size="16" font-family="sans-serif" fill="white" text-anchor="middle">江</text></svg>'
+  );
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {hasDomain && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={favicon} type="image/svg+xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="江恒律师 · 跨境税务与出海合规" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {hasDomain && <meta property="og:url" content={ogUrl} />}
+    <meta property="og:locale" content="zh_CN" />
+    {hasDomain && <meta property="og:image" content={ogImage} />}
+    {hasDomain && <meta property="og:image:width" content="1200" />}
+    {hasDomain && <meta property="og:image:height" content="630" />}
+    {hasDomain && <meta property="og:image:type" content="image/png" />}
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {hasDomain && <meta name="twitter:image" content={ogImage} />}
+
+    {
+      jsonLd.map((data) => (
+        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+      ))
+    }
+  </head>
+  <body>
+    <a href="#main" class="skip-link">跳到主要内容</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script is="inline">
+      // 站外链接统一在新标签打开并带安全 rel，避免 reverse tabnabbing
+      document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+        try {
+          var u = new URL(a.href, location.href);
+          if (u.hostname !== location.hostname) {
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+          }
+        } catch (e) {}
+      });
+    </script>
+  </body>
+</html>

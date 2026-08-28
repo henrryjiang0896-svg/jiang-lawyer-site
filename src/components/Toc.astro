@@ -1,0 +1,29 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Props {
+  headings: Heading[];
+}
+const { headings } = Astro.props;
+// 仅取 H2 / H3，且无意义锚点跳过
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length > 0 && (
+    <nav class="toc" aria-label="文章目录">
+      <div class="toc__title">本文目录</div>
+      {items.map((h) => (
+        <a
+          href={`#${h.slug}`}
+          class={h.depth === 3 ? 'toc-h3' : undefined}
+        >
+          {h.text}
+        </a>
+      ))}
+    </nav>
+  )
+}

@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { columnOf } from '../../lib/columns';
+
+const SERIES = '钱的法律身份';
+
+const articles = (await getCollection('articles'))
+  .filter((a) => a.data.series === SERIES)
+  .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished));
+
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+const view = articles.map((a) => ({
+  slug: a.slug,
+  title: a.data.title,
+  col: columnOf(a.data.category).label,
+  updated: a.data.updatedAsOf,
+  summary: summaryOf(a.body),
+}));
+---
+
+<BaseLayout
+  title="钱的法律身份｜金融法律观察"
+  description="从资金流、账户、税务与证据出发，讨论交易背后的法律边界与合规判断。江恒律师系列文章。"
+  canonicalPath="/articles/money-legal-identity"
+>
+  <div class="container">
+    <Breadcrumb
+      items={[
+        { label: '首页', href: '/' },
+        { label: '文章中心', href: '/articles' },
+        { label: '钱的法律身份' },
+      ]}
+    />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">系列 · 金融法律观察</p>
+      <h1>钱的法律身份</h1>
+      <p class="lead">
+        从资金流、账户、税务与证据出发，讨论交易背后的法律边界与合规判断。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      {
+        view.length > 0 ? (
+          <div class="dir-list">
+            {view.map((a) => (
+              <a class="dir-item" href={`/articles/${a.slug}`}>
+                <span class="dir-item__col">{a.col}</span>
+                <span>
+                  <span class="dir-item__title">{a.title}</span>
+                  <span class="dir-item__summary">{a.summary}</span>
+                </span>
+                <span class="dir-item__meta">更新于 {a.updated}</span>
+                <span class="dir-item__arrow" aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="muted">本系列文章整理中，敬请期待。</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

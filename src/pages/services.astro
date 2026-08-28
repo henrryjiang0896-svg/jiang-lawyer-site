@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import siteConfig from '../site.config';
+
+const d = siteConfig.display;
+---
+
+<BaseLayout
+  title="服务与能力"
+  description="江恒律师可提供的跨境税务、企业出海合规与跨境资金账户专业支持方向，以及典型工作流与交付边界说明。不构成结果承诺。"
+  canonicalPath="/services"
+>
+  <div class="container">
+    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '服务与能力' }]} />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">专业能力</p>
+      <h1>服务与能力</h1>
+      <p class="lead">
+        以下为可提供的专业支持方向，供企业与个人初步判断需求匹配度。
+        具体服务范围、工作方式与成果以正式委托与事实评估为准，不构成结果承诺。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      <div class="grid-2 svc-list">
+        {
+          d.services.map((s) => (
+            <div class="svc">
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <h2 class="section__title" style="margin-top:48px;">典型工作流（以风险评估为例）</h2>
+      <ol class="clean-list" style="list-style:none;">
+        <li><strong>1. 事实梳理</strong>：了解主体、业务、资金、货物、单证与监管连接点。</li>
+        <li><strong>2. 风险识别</strong>：对照适用规则（关税、CRS、外汇、海关、税务等）定位主要风险。</li>
+        <li><strong>3. 路径建议</strong>：就合规改进、证据留存与申报一致性给出可操作建议。</li>
+        <li><strong>4. 边界说明</strong>：明确本工作范围与不适用事项，必要时提示引入其他专业力量。</li>
+      </ol>
+
+      <h2 class="section__title" style="margin-top:48px;">交付边界与免责</h2>
+      <div class="disclaimer-box" role="note">
+        <strong>重要边界：</strong>
+        本站所述服务为「专业支持方向」描述，不承诺任何账户恢复、税款结果、关税待遇或案件结论。
+        涉及具体事项的判断，应结合主体、商品、监管模式、合同、资金与单证等事实，并依据发布时有效的法律法规与官方规则，由具备资质的专业人士作出。
+        本网站内容不构成法律、税务、外汇、海关或投资意见，也不构成委托代理关系。
+      </div>
+    </div>
+  </section>
+</BaseLayout>

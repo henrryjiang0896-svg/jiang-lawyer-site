@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { columnOf } from '../../lib/columns';
+
+const articles = (await getCollection('articles')).sort((a, b) =>
+  b.data.datePublished.localeCompare(a.data.datePublished)
+);
+
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+const view = articles.map((a) => ({
+  slug: a.slug,
+  title: a.data.title,
+  col: columnOf(a.data.category).label,
+  updated: a.data.updatedAsOf,
+  summary: summaryOf(a.body),
+}));
+---
+
+<BaseLayout
+  title="文章中心"
+  description="江恒律师关于跨境税务、企业出海合规与跨境资金账户的专业文章，基于官方来源撰写并经发布前核验。"
+  canonicalPath="/articles"
+>
+  <div class="container">
+    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '文章中心' }]} />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">专业文章</p>
+      <h1>文章中心</h1>
+      <p class="lead">以问题为标题的专业文章，标题即你会在搜索中直接提问的问题。</p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      <a class="series-strip" href="/articles/money-legal-identity">
+        <span class="series-strip__kicker">系列 · 金融法律观察</span>
+        <span class="series-strip__title">钱的法律身份</span>
+        <span class="series-strip__desc">从资金流、账户、税务与证据出发，讨论交易背后的法律边界与合规判断。</span>
+        <span class="series-strip__arrow" aria-hidden="true">→</span>
+      </a>
+      <div class="dir-list">
+        {
+          view.map((a) => (
+            <a class="dir-item" href={`/articles/${a.slug}`}>
+              <span class="dir-item__col">{a.col}</span>
+              <span>
+                <span class="dir-item__title">{a.title}</span>
+                <span class="dir-item__summary">{a.summary}</span>
+              </span>
+              <span class="dir-item__meta">更新于 {a.updated}</span>
+              <span class="dir-item__arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

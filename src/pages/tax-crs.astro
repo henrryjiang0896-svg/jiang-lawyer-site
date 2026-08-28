@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { columnOf } from '../lib/columns';
+
+const CATEGORY = '跨境税务与 CRS';
+const articles = (await getCollection('articles'))
+  .filter((a) => a.data.category === CATEGORY)
+  .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished));
+
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+const view = articles.map((a) => ({
+  slug: a.slug,
+  title: a.data.title,
+  col: columnOf(a.data.category).label,
+  updated: a.data.updatedAsOf,
+  summary: summaryOf(a.body),
+}));
+---
+
+<BaseLayout
+  title="跨境税务与 CRS"
+  description="江恒律师关于 CRS 金融账户信息交换、税收居民身份、离岸架构与中国税务连接点的文章与观点，均基于官方来源并经发布前核验。"
+  canonicalPath="/tax-crs"
+>
+  <div class="container">
+    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '跨境税务与 CRS' }]} />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">栏目</p>
+      <h1>跨境税务与 CRS</h1>
+      <p class="lead">
+        面向持有境外账户、离岸公司或跨境身份安排的个人与企业，聚焦 CRS 信息交换、
+        税收居民身份判定、离岸架构的中国税务连接点等高频问题。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      <h2 class="section__title">本栏目关注的核心问题</h2>
+      <ul class="clean-list">
+        <li>境外银行账户是否会被 CRS 交换回中国？</li>
+        <li>税收居民身份如何判定，与国籍、居留是否等同？</li>
+        <li>香港 / BVI 等离岸公司是否会被中国「穿透征税」？</li>
+        <li>存量账户、新开账户与尽职调查（自我证明）的关键节点。</li>
+      </ul>
+
+      <h2 class="section__title" style="margin-top:48px;">本栏目文章</h2>
+      <div class="dir-list">
+        {
+          view.map((a) => (
+            <a class="dir-item" href={`/articles/${a.slug}`}>
+              <span class="dir-item__col">{a.col}</span>
+              <span>
+                <span class="dir-item__title">{a.title}</span>
+                <span class="dir-item__summary">{a.summary}</span>
+              </span>
+              <span class="dir-item__meta">更新于 {a.updated}</span>
+              <span class="dir-item__arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+        {view.length === 0 && <p class="section__lead">本栏目文章整理中，敬请期待。</p>}
+      </div>
+
+      <div class="disclaimer-box" role="note" style="margin-top:36px;">
+        <strong>提示：</strong>
+        本栏目内容仅作一般性专业信息分享，不构成税务、法律或投资意见，亦不承诺任何结果。
+        具体个案应结合事实与发布时有效规则，由具备资质的专业人士判断。
+      </div>
+    </div>
+  </section>
+</BaseLayout>
