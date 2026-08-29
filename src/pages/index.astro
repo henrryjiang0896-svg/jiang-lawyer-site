@@ -54,9 +54,16 @@ const articlesView = articles.map((a) => ({
       </div>
       <aside class="hero__aside" aria-label="职业照与专业方向">
         <figure class="hero__photo">
-          <div class="hero__photo-frame" role="img" aria-label="江恒律师职业照（待提供）">
-            <span class="hero__photo-ph">职业照待提供</span>
-          </div>
+          <img
+            src="/images/portrait.png"
+            alt="江恒律师职业照"
+            class="hero__photo-img"
+            width="413"
+            height="619"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
           <figcaption>江恒律师 · 上海曼昆（深圳）律师事务所</figcaption>
         </figure>
         <div class="hero__module">
