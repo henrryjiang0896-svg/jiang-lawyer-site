@@ -11,7 +11,7 @@ const hasPhone = Boolean(a.phone);
 
 <BaseLayout
   title="联系咨询"
-  description="联系江恒律师做跨境税务、出海合规与跨境资金账户相关问题的初步评估。本站不提供在线表单提交，请勿通过本页发送保密材料。"
+  description="联系江恒律师做跨境税务、出海合规与跨境资金账户相关问题的初步评估。本站为静态站点，不提供在线表单，请通过已公开邮箱直接沟通，切勿发送保密材料。"
   canonicalPath="/contact"
 >
   <div class="container">
@@ -36,7 +36,13 @@ const hasPhone = Boolean(a.phone);
           <div class="navy-block" style="margin-bottom:32px;">
             <h2>公开联系方式</h2>
             <p>以下为已公开的正式联系渠道。请勿通过任何网页表单发送保密材料或敏感个人信息。</p>
-            {hasEmail && <a class="navy-block__email" href={`mailto:${a.email}`}>{a.email}</a>}
+            {hasEmail && (
+              <p style="margin:0;">
+                <a class="btn btn--light" href={`mailto:${a.email}?subject=跨境合规初步咨询`} style="font-size:16px;">
+                  {a.email}
+                </a>
+              </p>
+            )}
             {hasPhone && <p style="margin-top:10px;color:#cdd9e4;">电话：{a.phone}</p>}
             <p class="navy-block__note">
               提交咨询不构成委托关系，请勿发送保密材料或敏感信息（如账户号码、身份证件、合同条款）。
@@ -45,41 +51,27 @@ const hasPhone = Boolean(a.phone);
         )
       }
 
-      <div class="form__note">
-        <strong>提交前须知：</strong>
-        本站为静态站点，<strong>不提供在线表单提交功能</strong>，下方表单仅作示意，提交不会发送任何数据。
-        请勿通过任何网页表单发送保密材料或敏感个人信息（如账户号码、身份证件、合同条款）。
+      <div class="card" style="max-width: 720px;">
+        <div class="card__kicker">初步沟通</div>
+        <h3>如何联系江恒律师</h3>
+        <p>
+          本站为静态站点，<strong>不提供在线表单提交</strong>。如您有跨境税务、出海合规、账户受限或境外架构相关问题，
+          请直接通过已公开邮箱做初步沟通：
+        </p>
+        {
+          hasEmail && (
+            <p style="margin: 8px 0 0;">
+              <a class="btn btn--primary" href={`mailto:${a.email}?subject=跨境合规初步咨询`}>
+                {a.email}
+              </a>
+            </p>
+          )
+        }
+        <p style="margin-top:16px;font-size:14px;color:var(--muted);line-height:1.8;">
+          请在邮件中以概括性语言描述您的场景，避免包含可识别的保密信息（如账户号码、身份证件、合同条款）。
+          初步沟通不构成委托关系或保密义务。
+        </p>
       </div>
-
-      <form class="form" id="contact-form" novalidate>
-        <div class="form__row">
-          <label for="cf-name">称呼</label>
-          <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="您希望我们如何称呼您" />
-        </div>
-        <div class="form__row">
-          <label for="cf-contact">回联方式</label>
-          <input id="cf-contact" name="contact" type="text" placeholder="如微信 / 邮箱（请勿填写敏感账号）" />
-        </div>
-        <div class="form__row">
-          <label for="cf-topic">咨询方向</label>
-          <select id="cf-topic" name="topic">
-            <option>跨境税务与 CRS</option>
-            <option>企业出海与原产地合规</option>
-            <option>跨境资金与账户合规</option>
-            <option>其他</option>
-          </select>
-        </div>
-        <div class="form__row">
-          <label for="cf-msg">问题简述</label>
-          <textarea id="cf-msg" name="message" placeholder="请用概括性语言描述您的场景，避免包含可识别的保密信息。"></textarea>
-        </div>
-        <div class="form__check">
-          <input id="cf-agree" type="checkbox" />
-          <label for="cf-agree">我已阅读并理解：本表单不提交数据，且提交内容不构成委托关系或保密义务。</label>
-        </div>
-        <button type="submit" class="btn btn--primary" style="margin-top:18px;">提交（示意，不发送）</button>
-        <p id="cf-result" role="status" aria-live="polite" style="margin-top:12px;color:var(--accent);font-weight:600;"></p>
-      </form>
 
       <div class="disclaimer-box" role="note" style="margin-top:28px;">
         <strong>免责声明：</strong>
@@ -89,14 +81,3 @@ const hasPhone = Boolean(a.phone);
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  const form = document.getElementById('contact-form');
-  const result = document.getElementById('cf-result');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (result) {
-      result.textContent = '本站点不提供在线提交，您填写的内容不会发送。请通过上线后公布的官方渠道联系。';
-    }
-  });
-</script>

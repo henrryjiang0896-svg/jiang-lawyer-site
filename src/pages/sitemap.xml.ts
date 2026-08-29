@@ -10,6 +10,7 @@ const STATIC_PATHS = [
   '/outbound-compliance',
   '/cross-border-funds',
   '/services',
+  '/asean-supply-chain-compliance',
   '/contact',
   '/disclaimer',
 ];

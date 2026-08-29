@@ -41,31 +41,39 @@ const articlesView = articles.map((a) => ({
   <section class="hero">
     <div class="hero__inner">
       <div>
-        <p class="hero__eyebrow">{d.tagline}</p>
+        <p class="hero__eyebrow">{d.penName}</p>
         <h1>跨境税务与出海合规律师</h1>
         <p class="hero__sub">{d.subtitle}</p>
         <p class="hero__identity">
-          {d.lawFirm ?? siteConfig.author.lawFirm}｜7 年金融从业｜5 年法律实务
+          {siteConfig.author.lawFirm}｜7 年金融从业经验（5 年国有银行、2 年上市供应链企业）及 5 年法律实践经验。
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="/articles">阅读专业文章</a>
-          <a class="btn btn--ghost" href="/contact">联系咨询</a>
+          <a class="btn btn--primary" href="/contact">联系江恒律师</a>
+          <a class="btn btn--ghost" href="/articles">阅读专业文章</a>
         </div>
       </div>
-      <aside class="hero__module" aria-label="专业方向">
-        <p class="hero__module-title">专业方向</p>
-        <ul>
-          {
-            columns.map((c) => (
-              <li>
-                <a href={c.href}>
-                  <span>{c.label}</span>
-                  <span class="arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+      <aside class="hero__aside" aria-label="职业照与专业方向">
+        <figure class="hero__photo">
+          <div class="hero__photo-frame" role="img" aria-label="江恒律师职业照（待提供）">
+            <span class="hero__photo-ph">职业照待提供</span>
+          </div>
+          <figcaption>江恒律师 · 上海曼昆（深圳）律师事务所</figcaption>
+        </figure>
+        <div class="hero__module">
+          <p class="hero__module-title">专业方向</p>
+          <ul>
+            {
+              columns.map((c) => (
+                <li>
+                  <a href={c.href}>
+                    <span>{c.label}</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </aside>
     </div>
   </section>

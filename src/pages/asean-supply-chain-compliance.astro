@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import siteConfig from '../site.config';
+
+const a = siteConfig.author;
+const d = siteConfig.display;
+const pageUrl = `${siteConfig.domain}/asean-supply-chain-compliance`;
+
+// 结构化数据：以 Service 类型描述本专项评估服务；provider 仅在真实姓名已确认时关联。
+const name = (siteConfig.author.realName || '').trim();
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: '东盟供应链迁移与原产地合规评估',
+    description:
+      '面向将生产或采购向东南亚迁移的企业，就美国原产地规则、关税与贸易救济风险及证据留存提供初步评估与梳理。',
+    serviceType: '跨境合规评估',
+    areaServed: { '@type': 'Country', name: 'CN' },
+    url: pageUrl,
+    ...(name ? { provider: { '@type': 'Person', name } } : {}),
+  },
+];
+---
+
+<BaseLayout
+  title="东盟供应链迁移与原产地合规评估"
+  description="面向将生产或采购向东南亚迁移的企业，就美国原产地规则、关税与贸易救济风险及证据留存提供初步评估与梳理。不构成结果或通关承诺；具体以正式沟通与书面协议为准。"
+  canonicalPath="/asean-supply-chain-compliance"
+  jsonLd={jsonLd}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[
+        { label: '首页', href: '/' },
+        { label: '服务与能力', href: '/services' },
+        { label: '东盟供应链合规评估' },
+      ]}
+    />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">专项评估服务</p>
+      <h1>东盟供应链迁移与原产地合规评估</h1>
+      <p class="lead">
+        面向将生产、组装或采购环节迁往东南亚，并需评估美国原产地规则、关税与贸易救济风险的企业，
+        提供以事实与官方来源为基础的初步梳理与评估建议。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      <!-- 1. 服务适用对象 -->
+      <h2 class="section__title">服务适用对象</h2>
+      <p class="section__lead">
+        以下主体通常可能从本项初步评估中获益；是否适用，仍须结合具体业务与事实判断。
+      </p>
+      <ul class="clean-list">
+        <li>计划或正在将制造、组装或采购环节迁往东南亚（如越南、泰国、马来西亚、印度尼西亚等）的中国制造企业、出口商与品牌方；</li>
+        <li>产品进入美国市场、需评估原产地申报与关税待遇的企业；</li>
+        <li>面临美国 Section 301、Section 232、反倾销／反补贴（AD/CVD）或反规避调查风险，需要梳理供应链结构与单证一致性的主体；</li>
+        <li>海外客户或合作方要求提供原产地、关税或合规说明的企业。</li>
+      </ul>
+
+      <!-- 2. 常见业务场景与风险信号 -->
+      <h2 class="section__title" style="margin-top:48px;">常见业务场景与风险信号</h2>
+      <p class="section__lead">
+        以下为常见的业务场景与风险信号，仅用于说明风险类型，不代表特定客户情况，亦不意味着必然存在违规。
+      </p>
+      <ul class="clean-list">
+        <li>为应对高关税，将部分加工或组装环节外移，但核心零部件仍由境内供应；</li>
+        <li>境外子公司、境内主体与海外客户之间的交易定价、货物流与资金流不一致；</li>
+        <li>BOM（物料清单）、税则归类与原产地证书之间信息不匹配；</li>
+        <li>收到海外买家关于原产地、关税待遇或贸易救济措施的问询；</li>
+        <li>客户或监管方要求说明「实质性改变」的发生地与加工深度。</li>
+      </ul>
+
+      <!-- 3. 工作方法与评估步骤 -->
+      <h2 class="section__title" style="margin-top:48px;">工作方法与评估步骤（通用说明）</h2>
+      <p class="section__lead">
+        评估通常包含以下环节，具体视委托范围与事实复杂度而定；本说明不承诺任何合规、通关或税务结果。
+      </p>
+      <ol class="clean-list" style="list-style:none;">
+        <li><strong>1. 供应链结构梳理</strong>：主体、生产／采购地、货物流与资金流的连接点。</li>
+        <li><strong>2. 原产地规则比对</strong>：对照「实质性改变」等标准，判断可能适用的原产地。</li>
+        <li><strong>3. 关税与贸易救济风险初步筛查</strong>：Section 301／232、AD/CVD 与反规避措施的适用边界。</li>
+        <li><strong>4. 单证与证据留存建议</strong>：BOM、订单、物流、加工记录与声明之间的一致性。</li>
+        <li><strong>5. 书面评估结论与边界说明</strong>：明确本评估范围、不确定性及不适用事项。</li>
+      </ol>
+
+      <!-- 4. 可讨论的交付范围 -->
+      <h2 class="section__title" style="margin-top:48px;">可讨论的交付范围</h2>
+      <p class="section__lead">
+        视具体情况，交付内容可能包含以下部分；确切交付物、周期与费用以正式沟通及书面协议为准。
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card__kicker">可能包含</div>
+          <h3>书面梳理与建议</h3>
+          <p>供应链结构与风险点的书面梳理；原产地认定与关税风险的初步判断；证据留存与单证一致性建议清单。</p>
+        </div>
+        <div class="card">
+          <div class="card__kicker">协作接口</div>
+          <h3>外部专业力量衔接</h3>
+          <p>与美国当地律师或海关顾问的接口建议；必要的后续沟通与边界说明，以避免越界给出不具备资质的结论。</p>
+        </div>
+      </div>
+
+      <!-- 5. 联系与初步沟通 -->
+      <h2 class="section__title" style="margin-top:48px;">联系与初步沟通方式</h2>
+      <div class="navy-block">
+        <h2>初步沟通</h2>
+        <p>
+          如您希望就供应链迁移与原产地合规做初步评估，请通过已公开邮箱联系江恒律师，
+          并在邮件中以概括性语言描述企业所属行业与大致场景。
+        </p>
+        {
+          a.email && (
+            <p style="margin:0;">
+              <a class="btn btn--light" href={`mailto:${a.email}?subject=东盟供应链合规初步评估`} style="font-size:16px;">
+                {a.email}
+              </a>
+            </p>
+          )
+        }
+        <p class="navy-block__note">
+          初步沟通不构成委托关系或保密义务；请勿在邮件中发送可识别的保密信息（如账户号码、身份证件、合同条款）。
+        </p>
+      </div>
+
+      <!-- 常见场景（通用示例，匿名化） -->
+      <h2 class="section__title" style="margin-top:48px;">常见场景（通用示例）</h2>
+      <p class="section__lead">
+        以下为经充分匿名化、不可识别客户身份的通用场景示例，仅用于说明风险类型，不构成任何案例背书或结果暗示。
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card__kicker">场景示例一</div>
+          <h3>组装环节外移后的原产地认定</h3>
+          <p>
+            某深圳电子制造企业将最后组装环节迁至越南，但核心零部件仍由境内供应。通常需结合「实质性改变」标准、
+            税则归类与加工深度，判断能否以越南原产地申报美国进口，并留存相应证据链。具体结论视商品与事实而定。
+          </p>
+        </div>
+        <div class="card">
+          <div class="card__kicker">场景示例二</div>
+          <h3>客户要求提供原产地合规说明</h3>
+          <p>
+            某出口商收到海外买家关于原产地与关税待遇的问询。通常应先梳理供应链结构与单证一致性，
+            再决定是否及如何出具说明，避免因表述不当引发合规或贸易救济风险。
+          </p>
+        </div>
+      </div>
+
+      <!-- 资料领取（筹备中，诚实占位，无虚假表单/下载） -->
+      <h2 class="section__title" style="margin-top:48px;">资料领取（筹备中）</h2>
+      <div class="card" style="border-left:3px solid var(--accent);">
+        <div class="card__kicker">即将上线</div>
+        <h3>《东盟供应链原产地合规自检清单》</h3>
+        <p>
+          该自检清单正在整理中。资料正式上线前，如您希望提前获得通用自查要点，
+          可通过上方公开邮箱联系，并注明企业所属行业与大致场景；我们将在确认后以正式、可核验的方式提供。
+        </p>
+        <p style="margin-top:12px;font-size:13.5px;color:var(--muted);">
+          本站不会通过网页表单收集姓名、手机号或邮箱等个人信息；任何资料交付均以正式、可核验的方式完成。
+        </p>
+      </div>
+
+      <!-- 6. 免责声明 -->
+      <div class="disclaimer-box" role="note" style="margin-top:36px;">
+        <strong>专项免责声明：</strong>
+        具体服务范围、工作周期与委托关系，以正式沟通及书面协议为准。本页内容仅为一般专业信息分享，
+        不构成法律、海关、税务或贸易意见，亦不承诺任何合规、通关或税务结果。美国关税与贸易措施以官方最新来源与个案事实为准，
+        相关判断应结合主体、商品、监管模式、合同、资金与单证等事实，由具备资质的专业人士作出。
+      </div>
+    </div>
+  </section>
+</BaseLayout>
