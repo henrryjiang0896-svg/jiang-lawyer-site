@@ -30,6 +30,8 @@ const articlesView = articles.map((a) => ({
   updated: a.data.updatedAsOf,
   summary: summaryOf(a.body),
 }));
+const featuredArticles = articlesView.slice(0, 4);
+const latestArticles = articlesView.slice(0, 5);
 ---
 
 <BaseLayout
@@ -37,11 +39,11 @@ const articlesView = articles.map((a) => ({
   description={d.subtitle}
   jsonLd={jsonLdArr}
 >
-  <!-- 首屏：编辑型布局 -->
+  <!-- 首屏：个人品牌与专业方向 -->
   <section class="hero">
     <div class="hero__inner">
-      <div>
-        <p class="hero__eyebrow">{d.penName}</p>
+      <div class="hero__copy">
+        <p class="hero__eyebrow">{d.penName} · Attorney at Law</p>
         <h1>跨境税务与出海合规律师</h1>
         <p class="hero__sub">{d.subtitle}</p>
         <p class="hero__identity">
@@ -67,7 +69,7 @@ const articlesView = articles.map((a) => ({
           <figcaption>江恒律师 · 上海曼昆（深圳）律师事务所</figcaption>
         </figure>
         <div class="hero__module">
-          <p class="hero__module-title">专业方向</p>
+          <p class="hero__module-title">专业服务方向</p>
           <ul>
             {
               columns.map((c) => (
@@ -88,11 +90,17 @@ const articlesView = articles.map((a) => ({
   <!-- 我关注的问题 -->
   <section class="section">
     <div class="container">
-      <h2 class="section__title">我关注的问题</h2>
-      <p class="section__lead">标题即问题。点击进入，获取可直接核验的合规视角。</p>
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / INSIGHTS</p>
+          <h2 class="section__title">我关注的问题</h2>
+          <p class="section__lead">从业务情境出发，提供可被核验的合规分析。</p>
+        </div>
+        <a class="text-link" href="/articles">查看全部文章 <span aria-hidden="true">→</span></a>
+      </div>
       <div class="q-list">
         {
-          articlesView.map((a, i) => (
+          featuredArticles.map((a, i) => (
             <div class="q-item">
               <span class="q-item__no">{String(i + 1).padStart(2, '0')}</span>
               <a href={`/articles/${a.slug}`}>{a.title}</a>
@@ -107,8 +115,13 @@ const articlesView = articles.map((a) => ({
   <!-- 专业背景 -->
   <section class="section">
     <div class="container">
-      <h2 class="section__title">专业背景</h2>
-      <p class="section__lead">以金融底色理解风险，以律师视角提供可落地方案。</p>
+      <div class="section-heading">
+        <div>
+          <p class="section-index">02 / BACKGROUND</p>
+          <h2 class="section__title">金融与法律的复合经历</h2>
+          <p class="section__lead">以金融底色理解风险，以律师视角提供可落地方案。</p>
+        </div>
+      </div>
       <div class="stats">
         <div class="stat">
           <div class="stat__num">7<small> 年</small></div>
@@ -133,10 +146,16 @@ const articlesView = articles.map((a) => ({
   <!-- 服务与能力 -->
   <section class="section">
     <div class="container">
-      <h2 class="section__title">服务与能力</h2>
-      <p class="section__lead">
-        以下为可提供的专业支持方向，不构成结果承诺；具体范围以正式委托与事实评估为准。
-      </p>
+      <div class="section-heading">
+        <div>
+          <p class="section-index">03 / CAPABILITIES</p>
+          <h2 class="section__title">服务与能力</h2>
+          <p class="section__lead">
+            以下为可提供的专业支持方向，不构成结果承诺；具体范围以正式委托与事实评估为准。
+          </p>
+        </div>
+        <a class="text-link" href="/services">了解服务边界 <span aria-hidden="true">→</span></a>
+      </div>
       <div class="grid-2 svc-list">
         {
           d.services.map((s) => (
@@ -153,11 +172,17 @@ const articlesView = articles.map((a) => ({
   <!-- 最新文章 -->
   <section class="section">
     <div class="container">
-      <h2 class="section__title">最新文章</h2>
-      <p class="section__lead">基于官方来源撰写，并经发布前准确性核验。</p>
+      <div class="section-heading">
+        <div>
+          <p class="section-index">04 / PUBLICATIONS</p>
+          <h2 class="section__title">最新文章</h2>
+          <p class="section__lead">基于官方来源撰写，并经发布前准确性核验。</p>
+        </div>
+        <a class="text-link" href="/articles">文章中心 <span aria-hidden="true">→</span></a>
+      </div>
       <div class="dir-list">
         {
-          articlesView.map((a) => (
+          latestArticles.map((a) => (
             <a class="dir-item" href={`/articles/${a.slug}`}>
               <span class="dir-item__col">{a.col}</span>
               <span>
@@ -177,12 +202,17 @@ const articlesView = articles.map((a) => ({
   <section class="section">
     <div class="container">
       <div class="navy-block">
-        <h2>联系咨询</h2>
-        <p>
-          如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，
-          可就具体问题联系江恒律师做初步评估。
-        </p>
-        <a class="btn btn--light" href="/contact">联系咨询</a>
+        <div>
+          <p class="navy-block__eyebrow">INITIAL CONSULTATION</p>
+          <h2>让问题先回到事实与规则</h2>
+          <p>
+            如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，
+            可就具体问题联系江恒律师做初步评估。
+          </p>
+        </div>
+        <div class="navy-block__action">
+          <a class="btn btn--light" href="/contact">联系咨询 <span aria-hidden="true">→</span></a>
+        </div>
         <p class="navy-block__note">
           提交咨询不构成委托关系，请勿发送保密材料或敏感信息（如账户号码、身份证件、合同条款）。
         </p>
