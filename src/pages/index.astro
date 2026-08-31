@@ -185,10 +185,8 @@ const latestArticles = articlesView.slice(0, 5);
           latestArticles.map((a) => (
             <a class="dir-item" href={`/articles/${a.slug}`}>
               <span class="dir-item__col">{a.col}</span>
-              <span>
-                <span class="dir-item__title">{a.title}</span>
-                <span class="dir-item__summary">{a.summary}</span>
-              </span>
+              <span class="dir-item__title">{a.title}</span>
+              <span class="dir-item__summary">{a.summary}</span>
               <span class="dir-item__meta">更新于 {a.updated}</span>
               <span class="dir-item__arrow" aria-hidden="true">→</span>
             </a>
@@ -212,6 +210,7 @@ const latestArticles = articlesView.slice(0, 5);
         </div>
         <div class="navy-block__action">
           <a class="btn btn--light" href="/contact">联系咨询 <span aria-hidden="true">→</span></a>
+          <p class="navy-block__action-meta">邮件沟通 · 概括性场景优先</p>
         </div>
         <p class="navy-block__note">
           提交咨询不构成委托关系，请勿发送保密材料或敏感信息（如账户号码、身份证件、合同条款）。

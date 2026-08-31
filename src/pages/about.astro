@@ -74,10 +74,8 @@ const articlesView = articles.map((x) => ({
           articlesView.map((x) => (
             <a class="dir-item" href={`/articles/${x.slug}`}>
               <span class="dir-item__col">{x.col}</span>
-              <span>
-                <span class="dir-item__title">{x.title}</span>
-                <span class="dir-item__summary">{x.summary}</span>
-              </span>
+              <span class="dir-item__title">{x.title}</span>
+              <span class="dir-item__summary">{x.summary}</span>
               <span class="dir-item__meta">更新于 {x.updated}</span>
               <span class="dir-item__arrow" aria-hidden="true">→</span>
             </a>
