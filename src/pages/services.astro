@@ -15,7 +15,7 @@ const d = siteConfig.display;
     <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '服务与能力' }]} />
   </div>
 
-  <section class="page-head">
+  <section class="page-head service-head">
     <div class="container">
       <p class="eyebrow">专业能力</p>
       <h1>服务与能力</h1>
@@ -28,10 +28,11 @@ const d = siteConfig.display;
 
   <section class="section section--plain">
     <div class="container">
-      <div class="grid-2 svc-list">
+      <div class="service-grid">
         {
-          d.services.map((s) => (
-            <div class="svc">
+          d.services.map((s, i) => (
+            <div class="service-card">
+              <span>{String(i + 1).padStart(2, '0')}</span>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
@@ -39,23 +40,20 @@ const d = siteConfig.display;
         }
       </div>
 
-      <div class="card" style="margin-top:32px;border-left:3px solid var(--accent);">
-        <div class="card__kicker">专项评估服务</div>
+      <div class="service-feature">
+        <div><div class="card__kicker">专项评估服务</div>
         <h3>东盟供应链迁移与原产地合规评估</h3>
         <p>
           面向将生产或采购向东南亚迁移、并需评估美国原产地规则、关税与贸易救济风险的企业。
           查看服务说明、适用对象、评估步骤与初步沟通方式。
-        </p>
-        <a class="btn btn--ghost" href="/asean-supply-chain-compliance" style="margin-top:12px;">查看专项评估服务 →</a>
+        </p></div>
+        <a class="btn btn--ghost" href="/asean-supply-chain-compliance">查看专项评估服务 <span aria-hidden="true">→</span></a>
       </div>
 
-      <h2 class="section__title" style="margin-top:48px;">典型工作流（以风险评估为例）</h2>
-      <ol class="clean-list" style="list-style:none;">
-        <li><strong>1. 事实梳理</strong>：了解主体、业务、资金、货物、单证与监管连接点。</li>
-        <li><strong>2. 风险识别</strong>：对照适用规则（关税、CRS、外汇、海关、税务等）定位主要风险。</li>
-        <li><strong>3. 路径建议</strong>：就合规改进、证据留存与申报一致性给出可操作建议。</li>
-        <li><strong>4. 边界说明</strong>：明确本工作范围与不适用事项，必要时提示引入其他专业力量。</li>
-      </ol>
+      <div class="service-process">
+        <div><p class="section-index">WORKFLOW</p><h2>典型工作方式</h2></div>
+        <ol><li><b>01</b><span><strong>事实梳理</strong>了解主体、业务、资金、货物、单证与监管连接点。</span></li><li><b>02</b><span><strong>风险识别</strong>对照适用规则定位主要风险。</span></li><li><b>03</b><span><strong>路径建议</strong>就合规改进、证据留存与申报一致性提出可讨论的建议。</span></li><li><b>04</b><span><strong>边界说明</strong>明确工作范围与不适用事项。</span></li></ol>
+      </div>
 
       <h2 class="section__title" style="margin-top:48px;">交付边界与免责</h2>
       <div class="disclaimer-box" role="note">

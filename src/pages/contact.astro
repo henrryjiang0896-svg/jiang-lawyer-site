@@ -18,7 +18,7 @@ const hasPhone = Boolean(a.phone);
     <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '联系咨询' }]} />
   </div>
 
-  <section class="page-head">
+  <section class="contact-hero">
     <div class="container">
       <p class="eyebrow">咨询入口</p>
       <h1>联系咨询</h1>
@@ -29,19 +29,21 @@ const hasPhone = Boolean(a.phone);
     </div>
   </section>
 
-  <section class="section section--plain">
+  <section class="section section--plain contact-layout">
     <div class="container">
       {
         (hasEmail || hasPhone) && (
-          <div class="navy-block" style="margin-bottom:32px;">
-            <h2>公开联系方式</h2>
+          <div class="navy-block contact-channel">
+            <div><p class="navy-block__eyebrow">PUBLIC CHANNEL</p><h2>公开联系方式</h2>
             <p>以下为已公开的正式联系渠道。请勿通过任何网页表单发送保密材料或敏感个人信息。</p>
+            </div>
             {hasEmail && (
-              <p style="margin:0;">
+              <div class="navy-block__action">
                 <a class="btn btn--light" href={`mailto:${a.email}?subject=跨境合规初步咨询`} style="font-size:16px;">
-                  {a.email}
+                  发送咨询邮件 <span aria-hidden="true">→</span>
                 </a>
-              </p>
+                <p class="navy-block__action-meta">{a.email}</p>
+              </div>
             )}
             {hasPhone && <p style="margin-top:10px;color:#cdd9e4;">电话：{a.phone}</p>}
             <p class="navy-block__note">
@@ -51,26 +53,10 @@ const hasPhone = Boolean(a.phone);
         )
       }
 
-      <div class="card" style="max-width: 720px;">
-        <div class="card__kicker">初步沟通</div>
-        <h3>如何联系江恒律师</h3>
-        <p>
-          本站为静态站点，<strong>不提供在线表单提交</strong>。如您有跨境税务、出海合规、账户受限或境外架构相关问题，
-          请直接通过已公开邮箱做初步沟通：
-        </p>
-        {
-          hasEmail && (
-            <p style="margin: 8px 0 0;">
-              <a class="btn btn--primary" href={`mailto:${a.email}?subject=跨境合规初步咨询`}>
-                {a.email}
-              </a>
-            </p>
-          )
-        }
-        <p style="margin-top:16px;font-size:14px;color:var(--muted);line-height:1.8;">
-          请在邮件中以概括性语言描述您的场景，避免包含可识别的保密信息（如账户号码、身份证件、合同条款）。
-          初步沟通不构成委托关系或保密义务。
-        </p>
+      <div class="contact-guide">
+        <div><span>01</span><h3>概括说明问题</h3><p>请用非保密语言说明业务场景、所涉地区及当前困扰。</p></div>
+        <div><span>02</span><h3>避免发送敏感材料</h3><p>请勿发送账户号码、身份证件、完整合同或未脱敏单证。</p></div>
+        <div><span>03</span><h3>以正式沟通为准</h3><p>初步沟通不构成委托关系或保密义务。</p></div>
       </div>
 
       <div class="disclaimer-box" role="note" style="margin-top:28px;">
