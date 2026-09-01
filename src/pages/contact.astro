@@ -39,7 +39,7 @@ const hasPhone = Boolean(a.phone);
             </div>
             {hasEmail && (
               <div class="navy-block__action">
-                <a class="btn btn--light" href={`mailto:${a.email}?subject=跨境合规初步咨询`} style="font-size:16px;">
+                <a class="btn btn--light" href={`mailto:${a.email}?subject=初步咨询｜请概括业务场景`} style="font-size:16px;">
                   发送咨询邮件 <span aria-hidden="true">→</span>
                 </a>
                 <p class="navy-block__action-meta">{a.email}</p>
@@ -53,10 +53,31 @@ const hasPhone = Boolean(a.phone);
         )
       }
 
+      <div class="contact-brief">
+        <div>
+          <p class="section-index">WHO THIS IS FOR</p>
+          <h2>适合先做初步沟通的情形</h2>
+          <ul class="clean-list">
+            <li>正在处理跨境税务、供应链迁移、境外账户或跨境收款相关问题；</li>
+            <li>已收到银行、客户、合作方或相关机构的问询、限制或材料要求；</li>
+            <li>需要在作出申报、说明、资金安排或重大业务调整前，先厘清关键事实与风险边界。</li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-index">A HELPFUL FIRST EMAIL</p>
+          <h2>邮件中可简要说明三件事</h2>
+          <ol class="contact-brief__steps">
+            <li><span>01</span><p><strong>所涉业务</strong>：所属行业、涉及地区和当前业务背景。</p></li>
+            <li><span>02</span><p><strong>核心问题</strong>：希望优先厘清的一个或两个具体问题。</p></li>
+            <li><span>03</span><p><strong>时间节点</strong>：是否已有通知、回复期限或待作出的业务决策。</p></li>
+          </ol>
+        </div>
+      </div>
+
       <div class="contact-guide">
-        <div><span>01</span><h3>概括说明问题</h3><p>请用非保密语言说明业务场景、所涉地区及当前困扰。</p></div>
-        <div><span>02</span><h3>避免发送敏感材料</h3><p>请勿发送账户号码、身份证件、完整合同或未脱敏单证。</p></div>
-        <div><span>03</span><h3>以正式沟通为准</h3><p>初步沟通不构成委托关系或保密义务。</p></div>
+        <div><span>01</span><h3>先用概括信息</h3><p>在确认沟通安排前，以非保密语言描述场景即可。</p></div>
+        <div><span>02</span><h3>不要发送敏感材料</h3><p>请勿发送账户号码、身份证件、完整合同或未脱敏单证。</p></div>
+        <div><span>03</span><h3>以正式约定为准</h3><p>初步沟通不构成委托关系或保密义务。</p></div>
       </div>
 
       <div class="disclaimer-box" role="note" style="margin-top:28px;">

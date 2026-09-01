@@ -682,6 +682,14 @@ select:focus-visible {
 .download-strip{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;margin-top:28px;padding:30px 34px;border:1px solid var(--line);background:var(--white)}.download-strip h3{font-size:20px;margin:3px 0 7px}.download-strip p{color:var(--muted);font-size:14px;margin:0;max-width:52em}
 .service-process { display:grid; grid-template-columns: 230px 1fr; gap:44px; margin-top:70px; padding-top:4px; }.service-process h2{margin:0;font-size:29px}.service-process ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}.service-process li{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}.service-process b{color:var(--accent);font-size:12px;letter-spacing:.1em}.service-process span{color:var(--muted);font-size:14.5px}.service-process strong{display:block;color:var(--navy);font-size:17px;margin-bottom:3px}
 .contact-hero{background:linear-gradient(90deg,var(--paper-2) 0 42%,var(--paper) 42%);border-bottom:1px solid var(--line)}.contact-layout{padding-top:50px}.contact-channel{margin-bottom:40px}.contact-guide{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}.contact-guide>div{padding:26px 28px;border-right:1px solid var(--line)}.contact-guide>div:last-child{border-right:0}.contact-guide h3{font-size:18px;margin:12px 0 8px}.contact-guide p{color:var(--muted);font-size:14px;line-height:1.75;margin:0}
+.contact-brief { display: grid; grid-template-columns: 1fr 1fr; gap: 74px; padding: 6px 0 42px; }
+.contact-brief h2 { color: var(--navy); font-size: 24px; line-height: 1.45; margin: 0 0 18px; }
+.contact-brief .clean-list { gap: 14px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+.contact-brief__steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+.contact-brief__steps li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.contact-brief__steps span { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.contact-brief__steps p { color: var(--muted); font-size: 14px; line-height: 1.75; margin: 0; }
+.contact-brief__steps strong { color: var(--navy); }
 
 /* ===== 关于页：个人档案式布局 ===== */
 .about-hero { padding: 48px 0 76px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, var(--paper-2) 0 34%, var(--paper) 34%); }
@@ -751,7 +759,7 @@ select:focus-visible {
   .about-articles a { min-height: 0; padding: 22px 50px 22px 22px; border-right: 0; border-bottom: 1px solid var(--line); }
   .about-articles a:last-child { border-bottom: 0; }
   .about-articles b { top: 50%; right: 22px; bottom: auto; transform: translateY(-50%); }
-  .service-grid,.contact-guide{grid-template-columns:1fr}.service-card,.service-card:nth-child(2n){min-height:0;margin:0;padding:22px 0;border-right:0}.service-feature,.service-process,.download-strip{grid-template-columns:1fr;gap:22px}.service-process{margin-top:52px}.contact-hero{background:var(--paper-2)}.contact-guide>div{border-right:0;border-bottom:1px solid var(--line)}.contact-guide>div:last-child{border-bottom:0}
+  .service-grid,.contact-guide,.contact-brief{grid-template-columns:1fr}.service-card,.service-card:nth-child(2n){min-height:0;margin:0;padding:22px 0;border-right:0}.service-feature,.service-process,.download-strip{grid-template-columns:1fr;gap:22px}.service-process{margin-top:52px}.contact-hero{background:var(--paper-2)}.contact-guide>div{border-right:0;border-bottom:1px solid var(--line)}.contact-guide>div:last-child{border-bottom:0}.contact-brief{gap:34px;padding-bottom:34px}
   .topic-hero { padding: 52px 0 56px; }.topic-hero__grid,.topic-materials-layout{grid-template-columns:1fr;gap:34px}.topic-risk-grid{grid-template-columns:repeat(2,1fr)}.topic-risk-grid article:nth-child(2){margin-right:0;border-right:0}.topic-risk-grid article:nth-child(3),.topic-risk-grid article:nth-child(4){border-top:1px solid var(--line);padding-top:24px}.topic-scenarios{grid-template-columns:1fr}.topic-scenarios article,.topic-scenarios article + article{min-height:0;margin:0;padding:26px 0;border-right:0}.topic-scenarios article + article{border-top:1px solid var(--line)}
   .notes-grid { grid-template-columns: 1fr; }.note-card { min-height: 0; }
   .site-footer__inner { grid-template-columns: 1fr; gap: 24px; }
