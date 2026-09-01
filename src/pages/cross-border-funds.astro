@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import siteConfig from '../site.config';
 import { columnOf } from '../lib/columns';
 
 const CATEGORY = '跨境资金与账户合规';
@@ -19,59 +20,99 @@ const view = articles.map((a) => ({
   updated: a.data.updatedAsOf,
   summary: summaryOf(a.body),
 }));
+const email = siteConfig.author.email;
 ---
 
 <BaseLayout
-  title="跨境资金与账户合规"
-  description="江恒律师关于对公账户受限/冻结、跨境电商收款税务合规、跨境资金与银行尽调的文章与观点，基于中国官方来源并经发布前核验。"
+  title="企业资金边界与账户风险"
+  description="面向存在企业与个人资金往来、跨境收款或账户受限问题的主体，围绕交易事实、账户用途、证据留存与沟通边界进行初步梳理。"
   canonicalPath="/cross-border-funds"
 >
   <div class="container">
-    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '跨境资金与账户合规' }]} />
+    <Breadcrumb items={[{ label: '首页', href: '/' }, { label: '企业资金边界与账户风险' }]} />
   </div>
 
-  <section class="page-head">
-    <div class="container">
-      <p class="eyebrow">栏目</p>
-      <h1>跨境资金与账户合规</h1>
-      <p class="lead">
-        面向企业财务负责人、跨境电商经营者与有跨境资金往来需求的主体，
-        聚焦银行账户合规、跨境收款税务一致性与银行尽调逻辑。
-      </p>
+  <section class="topic-hero topic-hero--funds">
+    <div class="container topic-hero__grid">
+      <div>
+        <p class="topic-hero__eyebrow">专题入口 / FUNDS &amp; ACCOUNTS</p>
+        <h1>企业资金边界<br />与账户风险</h1>
+        <p class="topic-hero__lead">资金问题往往不是一笔转账本身，而是交易背景、主体关系、账户用途、货物或服务与留存材料能否彼此说明。</p>
+      </div>
+      <aside class="topic-hero__aside" aria-label="适用信号">
+        <p>THIS TOPIC MAY BE RELEVANT IF</p>
+        <div><span>01</span><strong>企业与个人账户之间存在频繁往来</strong></div>
+        <div><span>02</span><strong>跨境收款路径与经营主体不完全一致</strong></div>
+        <div><span>03</span><strong>收到银行问询、限制或账户冻结通知</strong></div>
+      </aside>
     </div>
   </section>
 
   <section class="section section--plain">
     <div class="container">
-      <h2 class="section__title">本栏目关注的核心问题</h2>
-      <ul class="clean-list">
-        <li>对公账户被限制或冻结，应如何区分银行风控、法院与涉案冻结？</li>
-        <li>跨境电商如何选择与主体、业务相匹配的合法收款路径？</li>
-        <li>主体、资金、货物、单证、申报如何保持一致以降低合规风险？</li>
-        <li>银行客户尽调（KYC）与可疑交易报告的基本逻辑。</li>
-      </ul>
+      <div class="section-heading"><div><p class="section-index">01 / RISK SIGNALS</p><h2 class="section__title">这些情形，通常值得先停下来核对</h2><p class="section__lead">并非所有差异都代表风险；但当资金解释与业务事实脱节时，越早整理，越有利于后续沟通。</p></div></div>
+      <div class="topic-risk-grid">
+        <article><span>01</span><h3>账户用途混同</h3><p>企业经营收支、股东或员工个人账户、家庭支出之间难以清晰区分。</p></article>
+        <article><span>02</span><h3>资金与业务脱节</h3><p>付款方、收款方、合同主体、发票、货物或服务之间无法形成完整对应关系。</p></article>
+        <article><span>03</span><h3>跨境路径复杂</h3><p>收款平台、境外账户或第三方代收安排与实际经营模式存在解释压力。</p></article>
+        <article><span>04</span><h3>外部措施已发生</h3><p>收到尽调问询、账户限制或冻结通知，需要及时固定文件与沟通记录。</p></article>
+      </div>
+    </div>
+  </section>
 
-      <h2 class="section__title" style="margin-top:48px;">本栏目文章</h2>
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-index">02 / ASSESSMENT SCOPE</p><h2 class="section__title">初步梳理会回到哪些事实</h2><p class="section__lead">先区分真实交易、资金安排与法律主体；再判断哪些问题需要进一步交由银行、税务、外汇或争议解决专业力量处理。</p></div></div>
+      <ol class="topic-scope">
+        <li><span>01</span><div><h3>主体与账户</h3><p>明确企业、股东、员工、关联方及各账户在交易中的实际角色和用途。</p></div></li>
+        <li><span>02</span><div><h3>交易背景</h3><p>核对资金对应的合同、订单、发票、服务、货物或其他可说明的商业背景。</p></div></li>
+        <li><span>03</span><div><h3>资金流与凭证</h3><p>整理付款、收款、结算及必要的沟通和留痕，识别需要补充说明的部分。</p></div></li>
+        <li><span>04</span><div><h3>外部问询与时间节点</h3><p>识别银行、平台、司法机关或合作方的已有要求，避免错过需要回应或保全的节点。</p></div></li>
+        <li><span>05</span><div><h3>处理边界与协作</h3><p>区分可先行解决的问题，以及需要会同税务、银行、外汇或诉讼专业人士处理的事项。</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container topic-materials-layout">
+      <div><p class="section-index">03 / PREPARE FOR A CONVERSATION</p><h2 class="section__title">初步沟通前，可先整理什么</h2><p class="section__lead">无需一次发送全部材料。请先概括问题和紧急程度；在未确认安全渠道与沟通安排前，不发送敏感信息。</p></div>
+      <div class="topic-materials">
+        <div><span>问题概况</span><p>账户主体、发生时间、目前受到的限制或需要作出的业务决策。</p></div>
+        <div><span>交易轮廓</span><p>资金金额区间、付款与收款主体、相关合同或业务的概括背景。</p></div>
+        <div><span>已有通知</span><p>银行、平台、合作方或相关机构的问询、限制、冻结或补充材料要求。</p></div>
+        <div><span>现有记录</span><p>已留存的合同、订单、发票、物流、沟通记录或其他能够说明事实的资料类别。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-index">04 / COMMON SCENARIOS</p><h2 class="section__title">两个常见的起点</h2><p class="section__lead">以下不对应任何客户，仅用于说明为什么资金问题需要先回到事实与证据，而不是仓促给出单一解释。</p></div></div>
+      <div class="topic-scenarios">
+        <article><p>SCENARIO 01</p><h3>公司账户受限后，是否应立即用个人账户继续收付款？</h3><div>关键不在于简单替换账户，而是先区分限制原因、既有交易、主体关系与后续安排可能产生的解释压力。</div></article>
+        <article><p>SCENARIO 02</p><h3>境外收款路径调整后，企业应如何证明与实际业务的一致性？</h3><div>通常需回看合同主体、服务或货物、收款记录与内部留痕能否形成清楚的对应关系，再讨论后续安排。</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-index">05 / READING</p><h2 class="section__title">延伸阅读</h2><p class="section__lead">围绕账户限制、跨境收款与证据链整理的已发布文章。</p></div></div>
       <div class="dir-list">
-        {
-          view.map((a) => (
-            <a class="dir-item" href={`/articles/${a.slug}`}>
-              <span class="dir-item__col">{a.col}</span>
-              <span class="dir-item__title">{a.title}</span>
-              <span class="dir-item__summary">{a.summary}</span>
-              <span class="dir-item__meta">更新于 {a.updated}</span>
-              <span class="dir-item__arrow" aria-hidden="true">→</span>
-            </a>
-          ))
-        }
+        {view.map((a) => <a class="dir-item" href={`/articles/${a.slug}`}><span class="dir-item__col">{a.col}</span><span class="dir-item__title">{a.title}</span><span class="dir-item__summary">{a.summary}</span><span class="dir-item__meta">更新于 {a.updated}</span><span class="dir-item__arrow" aria-hidden="true">→</span></a>)}
         {view.length === 0 && <p class="section__lead">本栏目文章整理中，敬请期待。</p>}
       </div>
+    </div>
+  </section>
 
-      <div class="disclaimer-box" role="note" style="margin-top:36px;">
-        <strong>提示：</strong>
-        本栏目内容仅作一般性专业信息分享，不构成法律、银行、外汇或税务意见，亦不承诺任何结果。
-        具体事项应结合事实与发布时有效规则，由具备资质的专业人士判断。
+  <section class="section section--tint">
+    <div class="container">
+      <div class="navy-block">
+        <div><p class="navy-block__eyebrow">INITIAL CONSULTATION</p><h2>先固定事实，再讨论下一步</h2><p>如希望就企业资金边界、账户受限或跨境收款安排进行初步沟通，可通过公开邮箱概括说明业务场景与时间节点。</p></div>
+        {email && <div class="navy-block__action"><a class="btn btn--light" href={`mailto:${email}?subject=企业资金边界与账户风险初步沟通`}>发送咨询邮件 →</a><p class="navy-block__action-meta">{email}</p></div>}
+        <p class="navy-block__note">初步沟通不构成委托关系或保密义务；请勿通过未约定渠道发送账户号码、身份证件、合同全文或其他可识别的保密信息。</p>
       </div>
+      <div class="disclaimer-box" role="note"><strong>专项说明：</strong>具体服务范围、工作周期与委托关系，以正式沟通及书面协议为准。本页仅作一般专业信息分享，不构成法律、银行、外汇或税务意见，亦不承诺任何结果。具体事项应结合事实与适用规则，由具备资质的专业人士判断。</div>
     </div>
   </section>
 </BaseLayout>
