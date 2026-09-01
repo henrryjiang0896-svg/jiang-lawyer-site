@@ -438,6 +438,41 @@ select:focus-visible {
 }
 .navy-block__email:hover { color: #fff; text-decoration: none; border-color: #fff; }
 
+/* ===== 东盟供应链专题入口 ===== */
+.topic-hero { margin-top: 8px; padding: 74px 0 78px; background: var(--navy); color: #fff; }
+.topic-hero__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 76px; align-items: end; }
+.topic-hero__eyebrow { color: #9fc4bc; font-size: 11px; font-weight: 700; letter-spacing: .14em; margin: 0 0 18px; }
+.topic-hero h1 { max-width: 760px; color: #fff; font-size: clamp(38px, 4.6vw, 58px); line-height: 1.16; margin: 0 0 20px; }
+.topic-hero__lead { color: #d0dce7; font-size: 17px; line-height: 1.9; margin: 0; max-width: 43em; }
+.topic-hero__aside { border-top: 1px solid rgba(255,255,255,.38); }
+.topic-hero__aside > p { color: #9fc4bc; font-size: 11px; font-weight: 700; letter-spacing: .1em; margin: 18px 0 3px; }
+.topic-hero__aside > div { display: grid; grid-template-columns: 42px 1fr; gap: 10px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+.topic-hero__aside span { color: #9fc4bc; font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.topic-hero__aside strong { color: #f6f8fa; font-size: 14.5px; line-height: 1.55; font-weight: 600; }
+.topic-risk-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+.topic-risk-grid article { min-height: 216px; padding: 26px 22px 24px 0; margin-right: 22px; border-right: 1px solid var(--line); }
+.topic-risk-grid article:nth-child(n + 2) { padding-left: 22px; }
+.topic-risk-grid article:last-child { margin-right: 0; border-right: 0; }
+.topic-risk-grid span { color: var(--copper); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+.topic-risk-grid h3 { color: var(--navy); font-size: 19px; margin: 34px 0 9px; }
+.topic-risk-grid p { color: var(--muted); font-size: 14.5px; line-height: 1.8; margin: 0; }
+.topic-scope { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+.topic-scope li { display: grid; grid-template-columns: 84px 1fr; gap: 22px; padding: 21px 0; border-bottom: 1px solid var(--line); }
+.topic-scope span { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; padding-top: 3px; }
+.topic-scope h3 { color: var(--navy); font-size: 19px; margin: 0 0 5px; }
+.topic-scope p { color: var(--muted); font-size: 14.5px; line-height: 1.75; margin: 0; }
+.topic-materials-layout { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr); gap: 80px; align-items: start; }
+.topic-materials { border-top: 1px solid var(--line-strong); }
+.topic-materials > div { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+.topic-materials span { color: var(--navy); font-size: 14.5px; font-weight: 700; }
+.topic-materials p { color: var(--muted); font-size: 14px; line-height: 1.7; margin: 0; }
+.topic-scenarios { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+.topic-scenarios article { min-height: 260px; padding: 28px 38px 28px 0; margin-right: 38px; border-right: 1px solid var(--line); }
+.topic-scenarios article + article { padding-left: 38px; padding-right: 0; margin-right: 0; border-right: 0; }
+.topic-scenarios p { color: var(--copper); font-size: 11px; font-weight: 700; letter-spacing: .12em; margin: 0 0 40px; }
+.topic-scenarios h3 { color: var(--navy); font-size: 22px; line-height: 1.5; margin: 0 0 14px; }
+.topic-scenarios div { color: var(--muted); font-size: 14.5px; line-height: 1.85; }
+
 /* ===== 通用列表 ===== */
 .clean-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .clean-list li { padding-left: 20px; position: relative; }
@@ -699,6 +734,7 @@ select:focus-visible {
   .about-articles a:last-child { border-bottom: 0; }
   .about-articles b { top: 50%; right: 22px; bottom: auto; transform: translateY(-50%); }
   .service-grid,.contact-guide{grid-template-columns:1fr}.service-card,.service-card:nth-child(2n){min-height:0;margin:0;padding:22px 0;border-right:0}.service-feature,.service-process,.download-strip{grid-template-columns:1fr;gap:22px}.service-process{margin-top:52px}.contact-hero{background:var(--paper-2)}.contact-guide>div{border-right:0;border-bottom:1px solid var(--line)}.contact-guide>div:last-child{border-bottom:0}
+  .topic-hero { padding: 52px 0 56px; }.topic-hero__grid,.topic-materials-layout{grid-template-columns:1fr;gap:34px}.topic-risk-grid{grid-template-columns:repeat(2,1fr)}.topic-risk-grid article:nth-child(2){margin-right:0;border-right:0}.topic-risk-grid article:nth-child(3),.topic-risk-grid article:nth-child(4){border-top:1px solid var(--line);padding-top:24px}.topic-scenarios{grid-template-columns:1fr}.topic-scenarios article,.topic-scenarios article + article{min-height:0;margin:0;padding:26px 0;border-right:0}.topic-scenarios article + article{border-top:1px solid var(--line)}
   .site-footer__inner { grid-template-columns: 1fr; gap: 24px; }
 }
 @media (max-width: 720px) {
@@ -731,4 +767,5 @@ select:focus-visible {
   .profile-facts { grid-template-columns: 1fr 1fr; }
   .profile-facts div:nth-child(2) { border-right: 0; }
   .profile-facts div:last-child { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-left: 0; }
+  .topic-hero h1{font-size:clamp(34px,10vw,44px)}.topic-risk-grid{grid-template-columns:1fr}.topic-risk-grid article,.topic-risk-grid article:nth-child(2){min-height:0;margin:0;padding:21px 0;border-right:0;border-bottom:1px solid var(--line)}.topic-risk-grid article:nth-child(n + 2){padding-left:0}.topic-risk-grid article:nth-child(3),.topic-risk-grid article:nth-child(4){padding-top:21px}.topic-risk-grid article:last-child{border-bottom:0}.topic-risk-grid h3{margin-top:16px}.topic-scope li{grid-template-columns:52px 1fr;gap:10px}.topic-materials > div{grid-template-columns:1fr;gap:5px}.topic-scenarios p{margin-bottom:20px}.topic-scenarios h3{font-size:20px}
 }
