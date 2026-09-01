@@ -30,10 +30,31 @@ const articlesView = articles.map((a) => ({
   updated: a.data.updatedAsOf,
   summary: summaryOf(a.body),
 }));
-const featuredArticles = articlesView.slice(0, 4);
 const latestArticles = articlesView.slice(0, 5);
 const leadArticle = latestArticles[0];
 const supportingArticles = latestArticles.slice(1, 4);
+const questionEntrances = [
+  {
+    question: '供应链迁至东盟后，原产地与申报信息应先核对什么？',
+    context: '适用于生产、组装或采购布局调整后，准备进入美国市场或回应海外客户问询的情境。',
+    href: '/asean-supply-chain-compliance',
+  },
+  {
+    question: '企业资金与个人资金混用时，应从哪些事实开始梳理？',
+    context: '先区分主体、账户、交易背景与留存材料，再讨论可能的风险和处理路径。',
+    href: '/cross-border-funds',
+  },
+  {
+    question: '境外账户信息交换后，哪些信息需要优先核验？',
+    context: '适用于需要理解申报、税务居民身份、账户信息与证据留存之间关系的情境。',
+    href: '/tax-crs',
+  },
+  {
+    question: '收到银行限制或账户冻结通知后，应先保留哪些材料？',
+    context: '先固定通知、交易背景和沟通记录，避免在事实尚未厘清时作出不一致表述。',
+    href: '/articles/corporate-bank-account-restricted-or-frozen',
+  },
+];
 ---
 
 <BaseLayout
@@ -89,25 +110,25 @@ const supportingArticles = latestArticles.slice(1, 4);
     </div>
   </section>
 
-  <!-- 我关注的问题 -->
+  <!-- 问题入口 -->
   <section class="section">
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">01 / INSIGHTS</p>
-          <h2 class="section__title">我关注的问题</h2>
-          <p class="section__lead">从业务情境出发，提供可被核验的合规分析。</p>
+          <p class="section-index">01 / START WITH A QUESTION</p>
+          <h2 class="section__title">先从你正在处理的问题开始</h2>
+          <p class="section__lead">不急于给出结论。先判断关键事实、需要核验的规则和应当留存的材料。</p>
         </div>
-        <a class="text-link" href="/articles">查看全部文章 <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="/services">查看服务方向 <span aria-hidden="true">→</span></a>
       </div>
       <div class="q-list">
         {
-          featuredArticles.map((a, i) => (
-            <div class="q-item">
+          questionEntrances.map((item, i) => (
+            <a class="q-item q-item--entry" href={item.href}>
               <span class="q-item__no">{String(i + 1).padStart(2, '0')}</span>
-              <a href={`/articles/${a.slug}`}>{a.title}</a>
+              <span class="q-item__body"><strong>{item.question}</strong><small>{item.context}</small></span>
               <span class="arrow" aria-hidden="true">→</span>
-            </div>
+            </a>
           ))
         }
       </div>

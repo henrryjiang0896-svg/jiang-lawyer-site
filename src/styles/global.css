@@ -391,6 +391,11 @@ select:focus-visible {
 .q-item a:hover { color: var(--accent); text-decoration: none; }
 .q-item .arrow { margin-left: auto; color: var(--line-strong); }
 .q-item:hover .arrow { color: var(--accent); }
+.q-item--entry { align-items: flex-start; color: var(--navy); text-decoration: none; }
+.q-item--entry:hover { background: var(--accent-soft); text-decoration: none; }
+.q-item__body { display: flex; flex: 1; flex-direction: column; gap: 5px; }
+.q-item__body strong { color: var(--navy); font-size: 18px; font-weight: 600; line-height: 1.5; }
+.q-item__body small { color: var(--muted); font-size: 14px; font-weight: 400; line-height: 1.65; }
 
 /* ===== 卡片（克制：1px 边框，无重阴影） ===== */
 .card {
