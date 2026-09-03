@@ -9,13 +9,14 @@ const WORKSPACE_ROOT = '/Users/henrry/WorkBuddy/2026-08-25-11-16-06';
 const SRC_DIR = WORKSPACE_ROOT;
 const DEST_DIR = join(PROJECT_ROOT, 'src/content/articles');
 
-// 待导入的源文件（工作区根目录下的 5 篇文章）
+// 待导入的源文件（工作区根目录下的 6 篇文章）
 const FILES = [
   'asean-origin-us-tariff-compliance.md',
   'corporate-bank-account-restricted-or-frozen.md',
   'overseas-bank-account-crs-exchange-to-china.md',
   'cross-border-ecommerce-payment-tax-compliance.md',
   'hong-kong-bvi-china-tax-risk.md',
+  'six-flows-compliance-map.md',
 ];
 
 // 非发布内容标记：以任意以 # 开头且包含「非发布内容」的行为界，从该处（含）全部剔除。
