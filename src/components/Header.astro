@@ -13,11 +13,12 @@ function isActive(href: string): boolean {
   <div class="site-header__inner">
     <a class="brand" href="/" aria-label="江恒律师首页">
       <span class="brand__name">江恒律师</span>
-      <span class="brand__tag">跨境税务与出海合规</span>
+      <span class="brand__tag">跨境资金与出海合规</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="nav__checkbox" aria-hidden="true" />
-    <label for="nav-toggle" class="nav__toggle">菜单</label>
-    <nav class="nav" aria-label="主导航">
+    <label for="nav-toggle" class="nav__toggle nav__fallback">菜单</label>
+    <button type="button" class="nav__toggle nav__button" aria-expanded="false" aria-controls="main-navigation" hidden>菜单</button>
+    <nav id="main-navigation" class="nav" aria-label="主导航">
       {
         nav.map((item) => (
           <a
@@ -59,3 +60,22 @@ function isActive(href: string): boolean {
     .site-header__inner { position: relative; }
   }
 </style>
+
+<script>
+ const menu = document.querySelector<HTMLButtonElement>('.nav__button');
+ const toggle = document.querySelector<HTMLInputElement>('#nav-toggle');
+ const fallback = document.querySelector<HTMLElement>('.nav__fallback');
+ if (menu && toggle && fallback) {
+   menu.hidden = false; fallback.hidden = true;
+   menu.addEventListener('click', () => {
+     toggle.checked = !toggle.checked;
+     menu.setAttribute('aria-expanded', String(toggle.checked));
+   });
+   document.addEventListener('keydown', (event) => {
+     if (event.key === 'Escape' && toggle.checked) {
+       toggle.checked = false; menu.setAttribute('aria-expanded', 'false'); menu.focus();
+     }
+   });
+ }
+</script>
+<style>.nav__toggle[hidden] { display: none !important; }</style>
