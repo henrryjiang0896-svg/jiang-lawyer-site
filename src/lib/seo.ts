@@ -16,7 +16,7 @@ export function websiteJsonLd(): Json {
   const w: Json = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: '江恒律师 · 跨境税务与出海合规',
+    name: `江恒律师 · ${siteConfig.display.tagline}`,
     inLanguage: 'zh-CN',
     description: siteConfig.display.subtitle,
   };
@@ -63,8 +63,8 @@ export function legalServiceJsonLd(): Json {
   const ls: Json = {
     '@context': 'https://schema.org',
     '@type': 'LegalService',
-    name: '江恒律师 · 跨境税务与出海合规咨询',
-    description: '跨境税务、企业出海合规与跨境资金账户的专业支持方向。',
+    name: '江恒律师 · 跨境资金与出海合规咨询',
+    description: siteConfig.display.subtitle,
     areaServed: { '@type': 'Country', name: 'CN' },
     serviceType: siteConfig.display.focuses,
   };
