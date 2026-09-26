@@ -49,7 +49,7 @@ const favicon =
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
-    <meta property="og:site_name" content="江恒律师 · 跨境税务与出海合规" />
+    <meta property="og:site_name" content={`江恒律师 · ${siteConfig.display.tagline}`} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     {hasDomain && <meta property="og:url" content={ogUrl} />}
