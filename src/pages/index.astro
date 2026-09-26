@@ -33,6 +33,16 @@ const articlesView = articles.map((a) => ({
 const latestArticles = articlesView.slice(0, 5);
 const leadArticle = latestArticles[0];
 const supportingArticles = latestArticles.slice(1, 4);
+const frameworkLayers = [
+  ['01', '交易', '这笔钱为什么支付，基础交易是否真实、完整并可解释。'],
+  ['02', '主体', '谁签约、履约、付款、收款，实际控制人与受益所有人是谁。'],
+  ['03', '货币', '使用什么计价、支付和持有，汇率与资产风险由谁承担。'],
+  ['04', '通道', '资金经过哪些银行、钱包、清算机构或链上节点。'],
+  ['05', '控制', '谁能拒绝、冻结、退回、分账或改变资金用途。'],
+  ['06', '合规', 'KYC、反洗钱、制裁与交易真实性义务如何分配。'],
+  ['07', '税务与数据', '资金性质、申报义务及随交易跨境流动的信息。'],
+  ['08', '证据与救济', '发生限制、误付或争议时，如何证明、申诉与追索。'],
+];
 const questionEntrances = [
   {
     question: '供应链迁至东盟后，原产地与申报信息应先核对什么？',
@@ -67,14 +77,15 @@ const questionEntrances = [
     <div class="hero__inner">
       <div class="hero__copy">
         <p class="hero__eyebrow">{d.penName} · Attorney at Law</p>
-        <h1>跨境税务与出海合规律师</h1>
+        <h1>跨境资金、数字人民币<br />与出海合规律师</h1>
         <p class="hero__sub">{d.subtitle}</p>
+        <p class="hero__thesis">我关注的不只是钱能否跨境移动，而是它进入了谁的规则、携带了什么信息、由谁控制，以及发生争议后如何追索。</p>
         <p class="hero__identity">
           {siteConfig.author.lawFirm}｜7 年金融从业经验（5 年国有银行、2 年上市供应链企业）及 5 年法律实践经验。
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="/contact">联系江恒律师</a>
-          <a class="btn btn--ghost" href="/articles">阅读专业文章</a>
+          <a class="btn btn--primary" href="/contact">联系咨询</a>
+          <a class="btn btn--ghost" href="/services">了解服务与流程</a>
         </div>
       </div>
       <aside class="hero__aside" aria-label="职业照与专业方向">
@@ -110,12 +121,35 @@ const questionEntrances = [
     </div>
   </section>
 
+  <!-- 核心方法：跨境资金八层审查 -->
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / CROSS-BORDER FUNDS MODEL</p>
+          <h2 class="section__title">跨境资金八层审查模型</h2>
+          <p class="section__lead">一笔钱跨越账户、国境或货币体系时，应当同时审查交易事实、支付基础设施、合规信息与争议救济。</p>
+        </div>
+        <a class="text-link" href="/articles/money-legal-identity">进入“钱的法律身份” <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="framework-grid">
+        {frameworkLayers.map(([no, title, desc]) => (
+          <article class="framework-card"><span>{no}</span><h3>{title}</h3><p>{desc}</p></article>
+        ))}
+      </div>
+      <div class="thesis-strip">
+        <p>强大，使别人不得不进入你的规则；可信，使别人愿意把钱和未来留在你的规则里。</p>
+        <a href="/articles/money-enters-currency-enters-rules">阅读总纲文章 <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- 问题入口 -->
   <section class="section">
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">01 / START WITH A QUESTION</p>
+          <p class="section-index">02 / START WITH A QUESTION</p>
           <h2 class="section__title">先从你正在处理的问题开始</h2>
           <p class="section__lead">不急于给出结论。先判断关键事实、需要核验的规则和应当留存的材料。</p>
         </div>
@@ -140,7 +174,7 @@ const questionEntrances = [
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">02 / BACKGROUND</p>
+          <p class="section-index">03 / BACKGROUND</p>
           <h2 class="section__title">金融与法律的复合经历</h2>
           <p class="section__lead">以金融底色理解风险，以律师视角提供可落地方案。</p>
         </div>
@@ -171,7 +205,7 @@ const questionEntrances = [
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">03 / CAPABILITIES</p>
+          <p class="section-index">04 / CAPABILITIES</p>
           <h2 class="section__title">服务与能力</h2>
           <p class="section__lead">
             以下为可提供的专业支持方向，不构成结果承诺；具体范围以正式委托与事实评估为准。
@@ -183,7 +217,7 @@ const questionEntrances = [
         {
           d.services.map((s) => (
             <div class="svc">
-              <h3>{s.title}</h3>
+              <h3><a href={s.href}>{s.title}</a></h3>
               <p>{s.desc}</p>
             </div>
           ))
@@ -197,7 +231,7 @@ const questionEntrances = [
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">04 / APPROACH</p>
+          <p class="section-index">05 / APPROACH</p>
           <h2 class="section__title">从事实到判断的工作方式</h2>
           <p class="section__lead">先厘清事实、规则与证据，再讨论可行路径与边界。</p>
         </div>
@@ -224,7 +258,7 @@ const questionEntrances = [
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="section-index">05 / PUBLICATIONS</p>
+          <p class="section-index">06 / PUBLICATIONS</p>
           <h2 class="section__title">最新文章</h2>
           <p class="section__lead">基于官方来源撰写，并经发布前准确性核验。</p>
         </div>
@@ -264,15 +298,15 @@ const questionEntrances = [
       <div class="navy-block">
         <div>
           <p class="navy-block__eyebrow">INITIAL CONSULTATION</p>
-          <h2>让问题先回到事实与规则</h2>
+          <h2>就你的具体问题联系咨询</h2>
           <p>
-            如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，
+            如您正在处理跨境资金、数字人民币、银行尽调、制裁、税务或出海交易问题，
             可就具体问题联系江恒律师做初步评估。
           </p>
         </div>
         <div class="navy-block__action">
           <a class="btn btn--light" href="/contact">联系咨询 <span aria-hidden="true">→</span></a>
-          <p class="navy-block__action-meta">邮件沟通 · 概括性场景优先</p>
+          <p class="navy-block__action-meta">先说明问题 · 再确认安排与费用</p>
         </div>
         <p class="navy-block__note">
           提交咨询不构成委托关系，请勿发送保密材料或敏感信息（如账户号码、身份证件、合同条款）。

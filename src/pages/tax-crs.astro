@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import ContactCTA from '../components/ContactCTA.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { columnOf } from '../lib/columns';
@@ -67,6 +68,7 @@ const view = articles.map((a) => ({
         {view.length === 0 && <p class="section__lead">本栏目文章整理中，敬请期待。</p>}
       </div>
 
+      <ContactCTA title="咨询跨境税务与 CRS相关问题" />
       <div class="disclaimer-box" role="note" style="margin-top:36px;">
         <strong>提示：</strong>
         本栏目内容仅作一般性专业信息分享，不构成税务、法律或投资意见，亦不承诺任何结果。
