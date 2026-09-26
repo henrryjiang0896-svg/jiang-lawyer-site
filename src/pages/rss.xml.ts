@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { getSiteHref } from '../lib/site';
+import siteConfig from '../site.config';
 
 function esc(s: string): string {
   return s
@@ -21,8 +22,8 @@ export const GET: APIRoute = async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- RSS 已安全跳过：site.config.ts 的 domain 尚未配置，构建时未生成 占位链接。上线前请填写真实 HTTPS 域名。 -->
 <rss version="2.0"><channel>
-  <title>江恒律师 · 跨境税务与出海合规</title>
-  <description>江恒律师关于跨境税务、企业出海合规与跨境资金账户的专业文章，基于官方来源撰写并经发布前核验。</description>
+  <title>江恒律师 · ${esc(siteConfig.display.tagline)}</title>
+  <description>${esc(siteConfig.display.subtitle)}</description>
   <language>zh-CN</language>
 </channel></rss>`;
     return new Response(xml, {
@@ -54,9 +55,9 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>江恒律师 · 跨境税务与出海合规</title>
+    <title>江恒律师 · ${esc(siteConfig.display.tagline)}</title>
     <link>${esc(BASE)}</link>
-    <description>江恒律师关于跨境税务、企业出海合规与跨境资金账户的专业文章，基于官方来源撰写并经发布前核验。</description>
+    <description>${esc(siteConfig.display.subtitle)}</description>
     <language>zh-CN</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}

@@ -1,17 +1,20 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import siteConfig from '../site.config';
 
 const a = siteConfig.author;
-const d = siteConfig.display;
+const allowedSources = ['/asean-supply-chain-compliance', '/cross-border-funds', ...(await getCollection('articles')).map(a => '/articles/' + a.slug)];
+const template = '问题类别：\n涉及国家或地区：\n紧急程度及明确期限：\n问题概况（请勿填写敏感信息）：\n希望解决的问题：\n联系方式：\n从何处了解到本站（选填）：';
+const emailHref = `mailto:${a.email}?subject=${encodeURIComponent('网站初步咨询')}&body=${encodeURIComponent(template)}`;
 const hasEmail = Boolean(a.email);
 const hasPhone = Boolean(a.phone);
 ---
 
 <BaseLayout
   title="联系咨询"
-  description="联系江恒律师做跨境税务、出海合规与跨境资金账户相关问题的初步评估。本站为静态站点，不提供在线表单，请通过已公开邮箱直接沟通，切勿发送保密材料。"
+  description="联系江恒律师，了解跨境税务、出海合规及账户问题的咨询流程、费用安排和首次沟通所需信息。"
   canonicalPath="/contact"
 >
   <div class="container">
@@ -35,14 +38,15 @@ const hasPhone = Boolean(a.phone);
         (hasEmail || hasPhone) && (
           <div class="navy-block contact-channel">
             <div><p class="navy-block__eyebrow">PUBLIC CHANNEL</p><h2>公开联系方式</h2>
-            <p>以下为已公开的正式联系渠道。请勿通过任何网页表单发送保密材料或敏感个人信息。</p>
+            <p>可直接发送邮件，或复制下方邮箱地址。首次联系简要说明问题即可。</p>
             </div>
             {hasEmail && (
               <div class="navy-block__action">
-                <a class="btn btn--light" href={`mailto:${a.email}?subject=初步咨询｜请概括业务场景`} style="font-size:16px;">
+                <a class="btn btn--light" href={emailHref} style="font-size:16px;">
                   发送咨询邮件 <span aria-hidden="true">→</span>
                 </a>
-                <p class="navy-block__action-meta">{a.email}</p>
+                <p class="navy-block__action-meta"><a href={emailHref}>{a.email}</a></p>
+                <button type="button" class="btn btn--light" data-copy={a.email}>复制邮箱地址</button><p class="copy-feedback" role="status" aria-live="polite"></p>
               </div>
             )}
             {hasPhone && <p style="margin-top:10px;color:#cdd9e4;">电话：{a.phone}</p>}
@@ -74,17 +78,53 @@ const hasPhone = Boolean(a.phone);
         </div>
       </div>
 
+      <section data-sources={JSON.stringify(allowedSources)} class="intake-template" aria-labelledby="template-title">
+        <h2 id="template-title">首次咨询格式</h2>
+        <p>复制后在邮件中填写即可，无需准备完整案卷。手机或微信内无法打开邮件应用时，可复制邮箱和格式后自行发送。</p>
+        <pre>{template}</pre>
+        <button class="btn btn--primary" type="button" data-copy={template}>复制咨询格式</button>
+        <p class="copy-feedback" role="status" aria-live="polite"></p>
+      </section>
+      <h2>联系后的三个步骤</h2>
       <div class="contact-guide">
-        <div><span>01</span><h3>先用概括信息</h3><p>在确认沟通安排前，以非保密语言描述场景即可。</p></div>
-        <div><span>02</span><h3>不要发送敏感材料</h3><p>请勿发送账户号码、身份证件、完整合同或未脱敏单证。</p></div>
-        <div><span>03</span><h3>以正式约定为准</h3><p>初步沟通不构成委托关系或保密义务。</p></div>
+        <div><span>01</span><h3>发送问题概况</h3><p>说明问题、涉及地区和时间节点，暂不发送敏感材料。</p></div>
+        <div><span>02</span><h3>确认承接与沟通安排</h3><p>先确认事项是否适合承接，再商议沟通方式与时间。本站不提供即时答复；如有明确期限，请在邮件标题中注明。</p></div>
+        <div><span>03</span><h3>约定范围与费用</h3><p>正式咨询或专项工作开展前，先确认服务范围、费用和预计周期。首次联系用于沟通安排，不代表已提供免费专业评估。</p></div>
       </div>
-
-      <div class="disclaimer-box" role="note" style="margin-top:28px;">
-        <strong>免责声明：</strong>
-        本页内容仅为一般信息，不构成法律、税务、外汇、海关或投资意见，亦不构成委托代理关系。
-        任何具体判断应结合事实与发布时有效规则，由具备资质的专业人士作出。
-      </div>
+      <p class="intake-note">发送邮件不代表已接受委托。请待确认沟通安排和材料传递渠道后，再按需提供材料。</p>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const topic = params.get('topic') || '';
+  const topics = ['跨境税务与 CRS', '企业出海与原产地合规', '跨境资金与账户合规', '东盟供应链合规评估', '资金与账户问题'];
+  const section = document.querySelector<HTMLElement>('[data-sources]');
+  const allowedSources: string[] = JSON.parse(section?.dataset.sources || '[]');
+  const source = params.get('from') || '';
+  const pre = section?.querySelector('pre');
+  if (pre) {
+    let content = pre.textContent || '';
+    if (topics.includes(topic)) content = content.replace('问题类别：', '问题类别：' + topic);
+    if (allowedSources.includes(source)) content += '\n相关页面：https://jianghenglegal.com' + source;
+    pre.textContent = content;
+    const copy = section?.querySelector<HTMLButtonElement>('[data-copy]');
+    if (copy) copy.dataset.copy = content;
+    document.querySelectorAll<HTMLAnchorElement>('.contact-channel a[href^="mailto:"]').forEach(link => {
+      const address = link.href.split('?')[0];
+      link.href = address + '?subject=' + encodeURIComponent('网站初步咨询' + (topics.includes(topic) ? '｜' + topic : '')) + '&body=' + encodeURIComponent(content);
+    });
+  }
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('.copy-feedback');
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy || '');
+        if (status) status.textContent = '已复制，请粘贴到邮件中。';
+      } catch {
+        if (status) status.textContent = '浏览器未允许复制，请长按或选中上方文字手动复制。';
+      }
+    });
+  });
+</script>
