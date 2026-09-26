@@ -6,6 +6,8 @@ const STATIC_PATHS = [
   '/',
   '/about',
   '/articles',
+  '/articles/digital-renminbi',
+  '/articles/money-legal-identity',
   '/notes',
   '/tax-crs',
   '/outbound-compliance',
