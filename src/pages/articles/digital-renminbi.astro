@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { columnOf } from '../../lib/columns';
+
+const SERIES = '数字人民币与跨境结算';
+
+const articles = (await getCollection('articles'))
+  .filter((a) => a.data.series === SERIES)
+  .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished));
+
+function summaryOf(body: string): string {
+  return body.match(/^>\s*摘要[：:]\s*(.+)$/m)?.[1]?.trim() ?? '';
+}
+const view = articles.map((a) => ({
+  slug: a.slug,
+  title: a.data.title,
+  col: columnOf(a.data.category).label,
+  updated: a.data.updatedAsOf,
+  summary: summaryOf(a.body),
+}));
+---
+
+<BaseLayout
+  title="数字人民币与企业交易｜专题文章"
+  description="从合同履行、支付业务边界、交易证据、资金隔离和钱包负债出发，分析数字人民币进入企业交易后的法律与合规问题。江恒律师系列文章。"
+  canonicalPath="/articles/digital-renminbi"
+>
+  <div class="container">
+    <Breadcrumb
+      items={[
+        { label: '首页', href: '/' },
+        { label: '文章中心', href: '/articles' },
+        { label: '数字人民币与企业交易' },
+      ]}
+    />
+  </div>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">系列 · 数字人民币法律观察</p>
+      <h1>数字人民币与企业交易</h1>
+      <p class="lead">
+        从付款效果、经营资格、证据链、资金归属和钱包负债出发，讨论数字人民币进入企业交易后真正需要回答的问题。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--plain">
+    <div class="container">
+      {
+        view.length > 0 ? (
+          <div class="dir-list">
+            {view.map((a) => (
+              <a class="dir-item" href={`/articles/${a.slug}`}>
+                <span class="dir-item__col">{a.col}</span>
+                <span class="dir-item__title">{a.title}</span>
+                <span class="dir-item__summary">{a.summary}</span>
+                <span class="dir-item__meta">更新于 {a.updated}</span>
+                <span class="dir-item__arrow" aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="muted">本系列文章整理中，敬请期待。</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
