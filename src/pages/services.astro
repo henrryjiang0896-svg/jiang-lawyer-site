@@ -34,7 +34,7 @@ const d = siteConfig.display;
           d.services.map((s, i) => (
             <div class="service-card" id={`service-${i + 1}`}>
               <span>{String(i + 1).padStart(2, '0')}</span>
-              <h3>{s.title}</h3>
+              <h3 id={s.href === '/tax-crs' ? 'tax-crs' : undefined}>{s.title}</h3>
               <p>{s.desc}</p>
               <p><strong>适用情形：</strong>{s.scenario}</p>
               <p><strong>主要成果：</strong>{s.outcome}具体范围与形式以委托约定为准。</p>
