@@ -37,7 +37,11 @@ function isActive(href: string): boolean {
 <style>
   .nav__toggle {
     display: none;
-    font-size: 14px;
+    font: inherit;
+    font-size: 15px;
+    min-width: 64px;
+    min-height: 44px;
+    touch-action: manipulation;
     border: 1px solid var(--line-strong);
     background: var(--white);
     color: var(--navy);
@@ -62,20 +66,38 @@ function isActive(href: string): boolean {
 </style>
 
 <script>
+ const header = document.querySelector<HTMLElement>('.site-header');
  const menu = document.querySelector<HTMLButtonElement>('.nav__button');
  const toggle = document.querySelector<HTMLInputElement>('#nav-toggle');
  const fallback = document.querySelector<HTMLElement>('.nav__fallback');
- if (menu && toggle && fallback) {
-   menu.hidden = false; fallback.hidden = true;
-   menu.addEventListener('click', () => {
-     toggle.checked = !toggle.checked;
-     menu.setAttribute('aria-expanded', String(toggle.checked));
+ const navigation = document.querySelector<HTMLElement>('#main-navigation');
+ if (header && menu && toggle && fallback && navigation) {
+   menu.hidden = false;
+   fallback.hidden = true;
+   const syncHeaderHeight = () => {
+     document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+   };
+   const setOpen = (open: boolean) => {
+     toggle.checked = open;
+     menu.setAttribute('aria-expanded', String(open));
+     menu.textContent = open ? '关闭菜单' : '菜单';
+     syncHeaderHeight();
+   };
+   menu.addEventListener('click', () => setOpen(!toggle.checked));
+   navigation.addEventListener('click', (event) => {
+     if ((event.target as Element).closest('a')) setOpen(false);
    });
    document.addEventListener('keydown', (event) => {
      if (event.key === 'Escape' && toggle.checked) {
-       toggle.checked = false; menu.setAttribute('aria-expanded', 'false'); menu.focus();
+       setOpen(false);
+       menu.focus();
      }
    });
+   const mobile = window.matchMedia('(max-width: 720px)');
+   mobile.addEventListener('change', () => setOpen(false));
+   new ResizeObserver(syncHeaderHeight).observe(header);
+   syncHeaderHeight();
  }
 </script>
 <style>.nav__toggle[hidden] { display: none !important; }</style>
+

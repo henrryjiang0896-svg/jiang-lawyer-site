@@ -6,7 +6,7 @@ import siteConfig from '../site.config';
 
 const a = siteConfig.author;
 const allowedSources = ['/asean-supply-chain-compliance', '/cross-border-funds', ...(await getCollection('articles')).map(a => '/articles/' + a.slug)];
-const template = '问题类别：\n涉及国家或地区：\n紧急程度及明确期限：\n问题概况（请勿填写敏感信息）：\n希望解决的问题：\n联系方式：\n从何处了解到本站（选填）：';
+const template = '问题概况（请勿填写敏感信息）：\n涉及国家或地区：\n明确期限（无则填写“暂无”）：\n\n问题类别（选填）：\n希望解决的问题（选填）：\n其他联系方式（选填）：\n从何处了解到本站（选填）：';
 const emailHref = `mailto:${a.email}?subject=${encodeURIComponent('网站初步咨询')}&body=${encodeURIComponent(template)}`;
 const hasEmail = Boolean(a.email);
 const hasPhone = Boolean(a.phone);
@@ -27,7 +27,7 @@ const hasPhone = Boolean(a.phone);
       <h1>联系咨询</h1>
       <p class="lead">
         如您正在处理跨境税务、出海合规、账户受限或境外架构相关问题，
-        可就具体问题联系江恒律师做初步评估。
+        可先简要说明情况，再确认服务范围与沟通安排。
       </p>
     </div>
   </section>
@@ -37,16 +37,16 @@ const hasPhone = Boolean(a.phone);
       {
         (hasEmail || hasPhone) && (
           <div class="navy-block contact-channel">
-            <div><p class="navy-block__eyebrow">PUBLIC CHANNEL</p><h2>公开联系方式</h2>
+            <div><h2>公开联系方式</h2>
             <p>可直接发送邮件，或复制下方邮箱地址。首次联系简要说明问题即可。</p>
             </div>
             {hasEmail && (
               <div class="navy-block__action">
                 <a class="btn btn--light" href={emailHref} style="font-size:16px;">
-                  发送咨询邮件 <span aria-hidden="true">→</span>
+                  打开邮件应用 <span aria-hidden="true">→</span>
                 </a>
                 <p class="navy-block__action-meta"><a href={emailHref}>{a.email}</a></p>
-                <button type="button" class="btn btn--light" data-copy={a.email}>复制邮箱地址</button><p class="copy-feedback" role="status" aria-live="polite"></p>
+                <button type="button" class="btn btn--light" data-copy={a.email}>复制邮箱</button><p class="copy-feedback" role="status" aria-live="polite"></p>
               </div>
             )}
             {hasPhone && <p style="margin-top:10px;color:#cdd9e4;">电话：{a.phone}</p>}
@@ -57,9 +57,16 @@ const hasPhone = Boolean(a.phone);
         )
       }
 
+      <section data-sources={JSON.stringify(allowedSources)} class="intake-template" aria-labelledby="template-title">
+        <h2 id="template-title">首次咨询格式</h2>
+        <p>先填写问题概况、涉及地区和明确期限，其余选填。手机或微信内无法打开邮件应用时，可复制邮箱和格式后自行发送。</p>
+        <pre>{template}</pre>
+        <button class="btn btn--primary" type="button" data-copy={template}>复制咨询格式</button>
+        <p class="copy-feedback" role="status" aria-live="polite"></p>
+      </section>
+
       <div class="contact-brief">
         <div>
-          <p class="section-index">WHO THIS IS FOR</p>
           <h2>适合先做初步沟通的情形</h2>
           <ul class="clean-list">
             <li>正在处理跨境税务、供应链迁移、境外账户或跨境收款相关问题；</li>
@@ -68,23 +75,15 @@ const hasPhone = Boolean(a.phone);
           </ul>
         </div>
         <div>
-          <p class="section-index">A HELPFUL FIRST EMAIL</p>
           <h2>邮件中可简要说明三件事</h2>
           <ol class="contact-brief__steps">
-            <li><span>01</span><p><strong>所涉业务</strong>：所属行业、涉及地区和当前业务背景。</p></li>
-            <li><span>02</span><p><strong>核心问题</strong>：希望优先厘清的一个或两个具体问题。</p></li>
-            <li><span>03</span><p><strong>时间节点</strong>：是否已有通知、回复期限或待作出的业务决策。</p></li>
+            <li><span>01</span><p><strong>问题概况</strong>：当前情况和希望解决的问题，暂不发送敏感材料。</p></li>
+            <li><span>02</span><p><strong>涉及地区</strong>：相关国家或地区；不确定时可注明。</p></li>
+            <li><span>03</span><p><strong>明确期限</strong>：是否已有通知或回复期限；没有则填写“暂无”。</p></li>
           </ol>
         </div>
       </div>
 
-      <section data-sources={JSON.stringify(allowedSources)} class="intake-template" aria-labelledby="template-title">
-        <h2 id="template-title">首次咨询格式</h2>
-        <p>复制后在邮件中填写即可，无需准备完整案卷。手机或微信内无法打开邮件应用时，可复制邮箱和格式后自行发送。</p>
-        <pre>{template}</pre>
-        <button class="btn btn--primary" type="button" data-copy={template}>复制咨询格式</button>
-        <p class="copy-feedback" role="status" aria-live="polite"></p>
-      </section>
       <h2>联系后的三个步骤</h2>
       <div class="contact-guide">
         <div><span>01</span><h3>发送问题概况</h3><p>说明问题、涉及地区和时间节点，暂不发送敏感材料。</p></div>
@@ -106,7 +105,7 @@ const hasPhone = Boolean(a.phone);
   const pre = section?.querySelector('pre');
   if (pre) {
     let content = pre.textContent || '';
-    if (topics.includes(topic)) content = content.replace('问题类别：', '问题类别：' + topic);
+    if (topics.includes(topic)) content = content.replace('问题类别（选填）：', '问题类别（选填）：' + topic);
     if (allowedSources.includes(source)) content += '\n相关页面：https://jianghenglegal.com' + source;
     pre.textContent = content;
     const copy = section?.querySelector<HTMLButtonElement>('[data-copy]');
@@ -121,7 +120,7 @@ const hasPhone = Boolean(a.phone);
       const status = button.parentElement?.querySelector('.copy-feedback');
       try {
         await navigator.clipboard.writeText(button.dataset.copy || '');
-        if (status) status.textContent = '已复制，请粘贴到邮件中。';
+        if (status) status.textContent = button.closest('.intake-template') ? '咨询格式已复制，请粘贴到邮件中填写。' : '邮箱已复制，请粘贴到邮件收件人栏。';
       } catch {
         if (status) status.textContent = '浏览器未允许复制，请长按或选中上方文字手动复制。';
       }

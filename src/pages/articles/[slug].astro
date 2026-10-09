@@ -75,7 +75,23 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
         <Toc headings={headings} />
       </aside>
 
-      <article class="prose article-main">
+      <article class="article-main">
+        <p class="article-kicker">{col.label}</p>
+        <h1 class="article-title">{d.title}</h1>
+        <div class="article-meta">
+          <span>{d2.penName}｜{d2.jobTitle}</span>
+          <span class="dot">更新于 {d.updatedAsOf}</span>
+        </div>
+
+        {
+          directAnswer && (
+            <div class="direct-answer" role="note">
+              <div class="direct-answer__label">文章提要</div>
+              <p>{directAnswer}</p>
+            </div>
+          )
+        }
+
         <!-- 移动端折叠目录 -->
         {
           tocItems.length > 0 && (
@@ -92,27 +108,13 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
           )
         }
 
-        <p class="article-kicker">{col.label}</p>
-        <h1 class="article-title">{d.title}</h1>
-        <div class="article-meta">
-          <span>{d2.penName}｜{d2.jobTitle}</span>
-          <span class="dot">更新于 {d.updatedAsOf}</span>
-        </div>
-
-        {
-          directAnswer && (
-            <div class="direct-answer" role="note">
-              <div class="direct-answer__label">直接答案</div>
-              <p>{directAnswer}</p>
-            </div>
-          )
-        }
-
         <div class="freshness">
           本文信息截至 {d.updatedAsOf}。所涉规则（关税、CRS、外汇、海关、税务等）均可能调整，引用与决策时请以官方最新来源与具备资质的专业判断为准。
         </div>
 
-        <Content />
+        <div class="prose article-content">
+          <Content />
+        </div>
 
         <AuthorCard />
 
@@ -120,13 +122,17 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
           text="本文仅为一般性专业信息分享，不构成法律、税务、外汇、海关或投资意见，也不构成委托代理关系，亦不承诺任何结果。具体事项应结合主体、商品、监管模式、合同、资金与单证等事实，由具备资质的专业人士判断。"
         />
 
-        <div class="navy-block" style="margin-top:36px;">
-          <h3>联系咨询</h3>
-          <p>对本文涉及的问题有进一步疑问，可就具体情形联系江恒律师做初步评估。</p>
-          <p><a class="text-link" href={col.slug === 'outbound-compliance' ? '/asean-supply-chain-compliance' : col.slug === 'tax-crs' ? '/services#tax-crs' : '/cross-border-funds'}>了解相关服务与工作范围 →</a></p>
-          <a class="btn btn--light" href={`/contact?topic=${encodeURIComponent(col.label)}&from=${encodeURIComponent('/articles/' + entry.slug)}`}>咨询本文相关问题</a>
-          <p class="navy-block__note">提交咨询不构成委托关系，请勿发送保密材料或敏感信息。</p>
-        </div>
+        <section class="navy-block article-consultation" aria-labelledby="article-consultation-title">
+          <div>
+            <h2 id="article-consultation-title">咨询本文相关问题</h2>
+            <p>先说明情况，再确认服务范围与沟通安排。</p>
+            <a class="text-link" href={col.slug === 'outbound-compliance' ? '/asean-supply-chain-compliance' : col.slug === 'tax-crs' ? '/services#tax-crs' : '/cross-border-funds'}>了解相关服务与工作范围</a>
+          </div>
+          <div class="navy-block__action">
+            <a class="btn btn--light" href={`/contact?topic=${encodeURIComponent(col.label)}&from=${encodeURIComponent('/articles/' + entry.slug)}`}>咨询本文相关问题</a>
+          </div>
+          <p class="navy-block__note">首次联系用于沟通安排，不构成委托关系。请勿发送保密材料或敏感信息。</p>
+        </section>
       </article>
     </div>
 
@@ -151,3 +157,21 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
     }
   </div>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.toc-mobile').forEach((directory) => {
+    directory.addEventListener('click', (event) => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+      if (!link) return;
+      const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+      if (!target) return;
+      event.preventDefault();
+      directory.open = false;
+      history.pushState(null, '', link.hash);
+      // 折叠目录后再定位；焦点跟随章节，便于键盘继续阅读。
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ block: 'start' });
+    });
+  });
+</script>
